@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+var exec = require('./lib/exec');
+exec.cli = true;
+exec.run();
