@@ -119,3 +119,5 @@ Writes log data in the given directory
 
 Watch changes in the given directories and/or files to auto-restart.
 
+#### -h, --help
+
