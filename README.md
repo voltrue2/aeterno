@@ -23,7 +23,7 @@ Example:
 ```javascript
 var aeterno = require('aeterno');
 aeterno.run(function () {
-	// here is yoir application logic
+	// here is your application logic
 });
 ```
 
