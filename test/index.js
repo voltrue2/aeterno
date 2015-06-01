@@ -2,21 +2,22 @@ var async = require('async');
 var assert = require('assert');
 var exec = require('child_process').exec;
 var node = process.execPath;
-var path = process.cwd() + '/node_modules/aeterno/aeterno';
-var command = node + ' ' + path;
-var app = path + 'test/test.js';
+var command = process.execPath + ' ' + __dirname + '/test.js';
 
 describe('Daemon tests ->', function () {
 
 	it('Resets the test environment', function (done) {
-		exec(command + ' stop ' + app, function () {
+		exec(command + ' stop', function () {
 			done();
 		});
 	});
 
 	it('Starts a daemon', function (done) {
 		var start = function (next) {
-			exec(command + ' start ' + app, function (err, out) {
+
+			console.log(command);
+
+			exec(command + ' start ', function (err, out) {
 				assert.equal(err, null);
 				assert(out);
 				next();
@@ -34,7 +35,7 @@ describe('Daemon tests ->', function () {
 
 	it('Cannot start a daemon that is already running', function (done) {
 		var start = function (next) {
-			exec(command + ' start ' + app, function (err, out) {
+			exec(command + ' start', function (err, out) {
 				assert(err);
 				assert.equal(out, '');
 				next();
@@ -53,21 +54,21 @@ describe('Daemon tests ->', function () {
 	it('Can restart a daemon that is running', function (done) {
 		var sout1;
 		var stat1 = function (next) {
-			exec(command + ' status ' + app, function (err, out) {
+			exec(command + ' status', function (err, out) {
 				assert.equal(err, null);
 				sout1 = out;
 				next();
 			});
 		};
 		var restart = function (next) {
-			exec(command + ' restart ' + app, function (err, out) {
+			exec(command + ' restart', function (err, out) {
 				assert.equal(err, null);
 				assert(out);
 				next();
 			});
 		};
 		var stat2 = function (next) {
-			exec(command + ' status ' + app, function (err, out) {
+			exec(command + ' status', function (err, out) {
 				assert.equal(err, null);
 				assert.notEqual(sout1, out);
 				next();				
@@ -84,7 +85,7 @@ describe('Daemon tests ->', function () {
 	it('Can reload a daemon that is running', function (done) {
 		var sout1;
 		var stat1 = function (next) {
-			exec(command + ' status ' + app, function (err, out) {
+			exec(command + ' status', function (err, out) {
 				assert.equal(err, null);
 				sout1 = out;
 				next();
@@ -98,7 +99,7 @@ describe('Daemon tests ->', function () {
 			});
 		};
 		var stat2 = function (next) {
-			exec(command + ' status ' + app, function (err, out) {
+			exec(command + ' status', function (err, out) {
 				assert.equal(err, null);
 				assert.notEqual(sout1, out);
 				next();				
@@ -127,7 +128,7 @@ describe('Daemon tests ->', function () {
 	it('Can auto-restart killed daemon process', function (done) {
 		var pid;
 		var getPid = function (next) {
-			exec(command + ' status ' + app, function (err, out) {
+			exec(command + ' status', function (err, out) {
 				assert.equal(err, null);
 				var list = out.split('\n');
 				var masterLine;
@@ -153,7 +154,7 @@ describe('Daemon tests ->', function () {
 			});
 		};
 		var checkRestarted = function (next) {
-			exec(command + ' status ' + app, function (err, out) {
+			exec(command + ' status', function (err, out) {
 				assert.equal(err, null);
 				var list = out.split('\n');
 				var masterLine;
@@ -223,7 +224,7 @@ describe('Daemon tests ->', function () {
 	it('Cannot restart a daemon that is not running', function (done) {
 		var sout1;
 		var stat1 = function (next) {
-			exec(command + ' status ' + app, function (err, out) {
+			exec(command + ' status', function (err, out) {
 				assert.equal(err, null);
 				sout1 = out;
 				next();
@@ -237,7 +238,7 @@ describe('Daemon tests ->', function () {
 			});
 		};
 		var stat2 = function (next) {
-			exec(command + ' status ' + app, function (err, out) {
+			exec(command + ' status', function (err, out) {
 				assert.equal(err, null);
 				assert.equal(sout1, out);
 				next();				
@@ -254,21 +255,21 @@ describe('Daemon tests ->', function () {
 	it('Cannot reload a daemon that is not running', function (done) {
 		var sout1;
 		var stat1 = function (next) {
-			exec(command + ' status ' + app, function (err, out) {
+			exec(command + ' status', function (err, out) {
 				assert.equal(err, null);
 				sout1 = out;
 				next();
 			});
 		};
 		var reload = function (next) {
-			exec(command + ' reload ' + app, function (err, out) {
+			exec(command + ' reload', function (err, out) {
 				assert(err);
 				assert.equal(out, '');
 				next();
 			});
 		};
 		var stat2 = function (next) {
-			exec(command + ' status ' + app, function (err, out) {
+			exec(command + ' status', function (err, out) {
 				assert.equal(err, null);
 				assert.equal(sout1, out);
 				next();				
@@ -285,7 +286,7 @@ describe('Daemon tests ->', function () {
 });
 
 function status(app, mustBeRunning, cb) {
-	exec(command + ' status ' + app, function (err, out) {
+	exec(command + ' status', function (err, out) {
 		if (mustBeRunning) {
 			assert.equal(err, null);
 			assert(out);

@@ -1,6 +1,7 @@
-var gn = require('../../../');
-gn.setConfigPath('node_modules/gracenode/scripts/daemon/test/');
-gn.setConfigFiles(['conf.json']);
-
-gn.setup(function () {
+var a = require('../');
+a.run(function () {
+	console.log('test');	
+	setInterval(function () {
+		console.log(Date.now());
+	}, 10000);
 });

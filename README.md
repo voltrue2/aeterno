@@ -9,7 +9,7 @@ This module can be used programatically.
 ## How To Install
 
 ```
-npm install
+npm install aeterno
 ```
 
 ## How To Use
@@ -83,10 +83,60 @@ node myApp.js list
 
 aeterno also allows you to daemonize your application without change your application's code.
 
+When installed from by `npm install aeterno`, the module creates an executable in your application's root directory.
+
+`aeterno` will be created in your application's directory.
+
 Example
 
+##### Start your application as a daemon
+
 ```
-node_modules/aeterno/aeterno start /path/to/your/app/
+./aeterno start /path/to/your/app/
+```
+
+##### Start your application as a daemon with logging
+
+```
+./aetero start /path/to/your/app/ -l /path/to/your/log/dir/
+```
+
+###### Start your application as a daemon and watch for changes in the given directories/files to auto-restart.
+
+```
+./aeterno start /path/to/your/app/ -w /path/to/watch/ file/to/watch
+```
+
+##### Stop your daemon
+
+```
+./aeterno stop /path/to/your/app/
+```
+
+##### Restart your daemon
+
+```
+./aeterno restart /path/to/your/app/
+```
+
+##### Reload your daemon
+
+**NOTE:** `reload` only works if your application listenes to `SIGHUP` and handles it as reload.
+
+```
+./aeterno reload /path/to/your/app/
+```
+
+##### Check the status of your daemon
+
+```
+./aeterno status /path/to/your/app/
+```
+
+##### List all daemon processes that run with aeterno
+
+```
+./aeterno list
 ```
 
 ## Commands And Options
