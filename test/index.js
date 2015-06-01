@@ -2,7 +2,7 @@ var async = require('async');
 var assert = require('assert');
 var exec = require('child_process').exec;
 var node = process.execPath;
-var command = process.execPath + ' ' + __dirname + '/test.js';
+var command = process.execPath + ' ./test/test.js';
 
 describe('Daemon tests ->', function () {
 
@@ -14,9 +14,6 @@ describe('Daemon tests ->', function () {
 
 	it('Starts a daemon', function (done) {
 		var start = function (next) {
-
-			console.log(command);
-
 			exec(command + ' start ', function (err, out) {
 				assert.equal(err, null);
 				assert(out);
@@ -24,7 +21,7 @@ describe('Daemon tests ->', function () {
 			});
 		};
 		var stat = function (next) {
-			status(app, true, next);
+			status(true, next);
 		};
 		var tasks = [
 			start,
@@ -42,7 +39,7 @@ describe('Daemon tests ->', function () {
 			});
 		};
 		var stat = function (next) {
-			status(app, true, next);
+			status(true, next);
 		};
 		var tasks = [
 			start,
@@ -82,39 +79,8 @@ describe('Daemon tests ->', function () {
 		async.series(tasks, done);
 	});
 
-	it('Can reload a daemon that is running', function (done) {
-		var sout1;
-		var stat1 = function (next) {
-			exec(command + ' status', function (err, out) {
-				assert.equal(err, null);
-				sout1 = out;
-				next();
-			});
-		};
-		var reload = function (next) {
-			exec(command + ' reload ' + app, function (err, out) {
-				assert.equal(err, null);
-				assert(out);
-				next();
-			});
-		};
-		var stat2 = function (next) {
-			exec(command + ' status', function (err, out) {
-				assert.equal(err, null);
-				assert.notEqual(sout1, out);
-				next();				
-			});
-		};
-		var tasks = [
-			stat1,
-			reload,
-			stat2
-		];
-		async.series(tasks, done);
-	});
-
 	it('Views the status of daemon that is running', function (done) {
-		status(app, true, done);
+		status(true, done);
 	});
 
 	it('Lists running daemon processes', function (done) {
@@ -181,14 +147,14 @@ describe('Daemon tests ->', function () {
 	*/
 	it('Stops a daemon that is running', function (done) {
 		var stop = function (next) {
-			exec(command + ' stop ' + app, function (err, out) {
+			exec(command + ' stop', function (err, out) {
 				assert.equal(err, null);
 				assert(out);
 				next();
 			});
 		};
 		var stat = function (next) {
-			status(app, false, next);
+			status(false, next);
 		};
 		var tasks = [
 			stop,
@@ -200,14 +166,14 @@ describe('Daemon tests ->', function () {
 
 	it('Cannot stop a daemon that is not running', function (done) {
 		var stop = function (next) {
-			exec(command + ' stop ' + app, function (err, out) {
+			exec(command + ' stop', function (err, out) {
 				assert(err);
 				assert.equal(out, '');
 				next();
 			});
 		};
 		var stat = function (next) {
-			status(app, false, next);
+			status(false, next);
 		};
 		var tasks = [
 			stop,
@@ -218,7 +184,7 @@ describe('Daemon tests ->', function () {
 	});
 
 	it('Cannot view the satus of daemon that is not running', function (done) {
-		status(app, false, done);
+		status(false, done);
 	});
 
 	it('Cannot restart a daemon that is not running', function (done) {
@@ -231,7 +197,7 @@ describe('Daemon tests ->', function () {
 			});
 		};
 		var restart = function (next) {
-			exec(command + ' restart ' + app, function (err, out) {
+			exec(command + ' restart', function (err, out) {
 				assert(err);
 				assert.equal(out, '');
 				next();
@@ -247,6 +213,37 @@ describe('Daemon tests ->', function () {
 		var tasks = [
 			stat1,
 			restart,
+			stat2
+		];
+		async.series(tasks, done);
+	});
+	/*
+	it('Can reload a daemon that is running', function (done) {
+		var sout1;
+		var stat1 = function (next) {
+			exec(command + ' status', function (err, out) {
+				assert.equal(err, null);
+				sout1 = out;
+				next();
+			});
+		};
+		var reload = function (next) {
+			exec(command + ' reload', function (err, out) {
+				assert.equal(err, null);
+				assert(out);
+				next();
+			});
+		};
+		var stat2 = function (next) {
+			exec(command + ' status', function (err, out) {
+				assert.equal(err, null);
+				assert.notEqual(sout1, out);
+				next();				
+			});
+		};
+		var tasks = [
+			stat1,
+			reload,
 			stat2
 		];
 		async.series(tasks, done);
@@ -282,10 +279,11 @@ describe('Daemon tests ->', function () {
 		];
 		async.series(tasks, done);
 	});
+	*/
 
 });
 
-function status(app, mustBeRunning, cb) {
+function status(mustBeRunning, cb) {
 	exec(command + ' status', function (err, out) {
 		if (mustBeRunning) {
 			assert.equal(err, null);

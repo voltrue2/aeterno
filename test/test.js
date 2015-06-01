@@ -1,7 +1,11 @@
 var a = require('../');
 a.run(function () {
-	console.log('test');	
-	setInterval(function () {
+	var interval = setInterval(function () {
 		console.log(Date.now());
 	}, 10000);
+	process.on('SIGHUP', function () {
+		clearInterval(interval);
+		console.log('reload');
+		process.exit();
+	});
 });
