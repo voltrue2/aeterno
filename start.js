@@ -3,6 +3,7 @@
 var print = require('./lib/print');
 var run = require('child_process').spawn;
 var Status = require('./lib/status').Status;
+var root = __dirname;
 
 module.exports = function (path, logPath, autoReload) {
 	// listener for exceptions
@@ -18,7 +19,7 @@ module.exports = function (path, logPath, autoReload) {
 		}
 		// set up the options
 		var args = [
-			'../aeterno/monitor',
+			root + '/monitor',
 			'start',
 			path
 		];
