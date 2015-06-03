@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs');
+var modName = require('./lib/modname');
 var args = require('./lib/args');
 var net = require('net');
 var spawn = require('child_process').spawn;
@@ -19,6 +20,11 @@ var logger = new Log(args.getLogPath());
 // message
 var Message = require('./lib/message');
 
+// if an alternate name is given
+if (args.getName()) {
+	modName.set(args.getName());
+}
+
 // start file logging stream if enabled
 // and start monitor process
 logger.start(appNameForLog, function () {
@@ -28,6 +34,8 @@ logger.start(appNameForLog, function () {
 	});
 
 	process.on('exit', handleExit);
+	
+	logger.info('Daemon name: ' + modName.get());
 
 	if (args.getCommand() === 'start') {
 		path = appNameForLog || null;
@@ -226,10 +234,14 @@ function parseCommand(cmd) {
 }
 
 function handleMessage(parsed) {
+
+	logger.info('message command: ' + parsed.command + ' [name: ' + modName.get() + ']');
+		
+	var message = new Message(parsed.value);
+	message.startSend();
+
 	switch (parsed.command) {
 		case 'status':
-			var message = new Message(parsed.value);
-			message.startSend();
 			message.send({
 				monitorVersion: pkg.version,
 				path: app.path,
@@ -241,6 +253,9 @@ function handleMessage(parsed) {
 			});
 			break;
 		default:
+			message.send({
+				error: 'unkownCommand'
+			});		
 			break;
 	}
 }

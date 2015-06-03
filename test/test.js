@@ -1,4 +1,5 @@
 var a = require('../');
+a.setName('test');
 a.run(function () {
 	var interval = setInterval(function () {
 		console.log(Date.now());

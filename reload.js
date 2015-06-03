@@ -1,21 +1,19 @@
 'use strict';
 
-var gn = require('gracenode');
-var logger = gn.log.create('daemon-reload');
-var lib = require('./utils/lib');
-var Status = require('./utils/status').Status;
+var print = require('./lib/print');
+var Status = require('./lib/status').Status;
 
 module.exports = function (path) {
 	// listener for exceptions
-	gn.on('uncaughtException', function () {
-		logger.error(lib.color(path, lib.COLORS.RED));
-		gn.exit();
+	process.on('uncaughtException', function () {
+		print.error(print.r(path));
+		process.exit(1);
 	});
 	// check for daemon process
 	var status = new Status(path);
 	status.setup(function () {
 		if (!status.isRunning) {
-			logger.error(lib.color('Daemon process ' + path + ' not running', lib.COLORS.RED));
+			print.error(print.r('Daemon process ' + path + ' not running'));
 			return status.end(new Error('Daemon process ' + path + ' not running'));	
 		}
 		status.reload();

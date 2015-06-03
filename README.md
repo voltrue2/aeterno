@@ -171,3 +171,13 @@ Watch changes in the given directories and/or files to auto-restart.
 
 #### -h, --help
 
+## Methods
+
+### .run(callback [function])
+
+Used when you are using aeterno programatically.
+
+### .setName(daemonName [string])
+
+You may change the name of daemon.
+

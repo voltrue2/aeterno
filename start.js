@@ -1,5 +1,6 @@
 'use strict';
 
+var modName = require('./lib/modname');
 var print = require('./lib/print');
 var run = require('child_process').spawn;
 var Status = require('./lib/status').Status;
@@ -21,7 +22,9 @@ module.exports = function (path, logPath, autoReload) {
 		var args = [
 			root + '/monitor',
 			'start',
-			path
+			path,
+			'-n',
+			modName.get()
 		];
 		if (logPath) {
 			args.push('-l');
