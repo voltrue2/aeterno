@@ -1,7 +1,7 @@
 {
 	"name": "aeterno",
 	"description": "A daemonization tool written in javascript.",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"author": "Nobuyori Takahashi <voltrue2@yahoo.com>",
 	"repository": {
 		"type": "git",

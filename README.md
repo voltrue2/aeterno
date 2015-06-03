@@ -161,11 +161,11 @@ Example
 
 Be more verbose.
 
-#### -l [PATH]
+#### -l [PATH], --log=[PATH]
 
 Writes log data in the given directory
 
-#### -w [PATH] [PATH] ...
+#### -w [PATH] [PATH] ..., -a [PATH] [PATH]
 
 Watch changes in the given directories and/or files to auto-restart.
 
@@ -189,3 +189,43 @@ You may manually change the target application path to daemonize.
 
 **NOTE:** This is used only when you are using aeterno programatically.
 
+## .aeternorc file
+
+aeterno module can read `.aeternorc` file to allow configurations from outside.
+
+The default `.aeternorc` file will be created when installing the module via `npm` in your application's root directory.
+
+The configurable values are:
+
+- Daemon tool name. This will have the same effect as calling `aeterno.setName();`.
+
+- Help text content.
+
+Default Vaule:
+
+```
+{
+        "name": "aeterno",
+        "help": {
+                        "usage": "Usage:\n./aeterno {start|stop|restart|reload|status|list|clean}\n[PATH]...\n[OPTION]",
+                        "reloadNote": "{reload} works ONLY if your application handles SIGHUP.",
+                        "description": "Daemonaize a target application process and monitor it.\n",
+                        "options": "Options:",
+                        "log": "       -l, --log=[path]:",
+                        "logDesc": "  Write log data into a file",
+                        "watch": "       -w, -a:",
+                        "watchDesc": "            Automatically restart the daemon process if watch file(s) change.",
+                        "verbose": "       -v, --verbose:",
+                        "verboseDesc": "     Be more verbose.",
+                        "example": "Examples:",
+                        "start": "     ./aeterno start",
+                        "startDesc": "                       Start a daemon process.",
+                        "startWithPath": "     ./aeterno start ./myServer.js",
+                        "startWithPathDesc": "         Start a daemon process of \"./myServer.js\".",
+                        "startWithLog": "     ./aeterno start -l ./daemonlog/",
+                        "startWithLogDesc": "       Start a daemon process and write log data to \"./daemonlog/\" directory.",
+                        "startAndWatch": "     ./aeterno start -w ./modules ./lib",
+                        "startAndWatchDesc": "    Start a daemon process and watch \"./modules\" and \"./lib\". Anything changes in the watched directory, daemon process will automatically restart"
+        }
+}
+```
