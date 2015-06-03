@@ -193,8 +193,6 @@ You may manually change the target application path to daemonize.
 
 aeterno module can read `.aeternorc` file to allow configurations from outside.
 
-The default `.aeternorc` file will be created when installing the module via `npm` in your application's root directory.
-
 The configurable values are:
 
 - Daemon tool name. This will have the same effect as calling `aeterno.setName();`.
