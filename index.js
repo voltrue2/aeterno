@@ -4,12 +4,17 @@
 
 var modName = require('./lib/modname');
 var exec = require('./lib/exec');
+var appPath;
 
 exports.setName = function (name) {
 	modName.set(name);
 };
 
+exports.setApplicationPath = function (path) {
+	appPath = path;
+};
+
 exports.run = function (cb) {
-	exec.appPath = module.parent.filename;
+	exec.appPath = appPath || module.parent.filename;
 	exec.run(cb);
 };

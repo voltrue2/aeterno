@@ -181,3 +181,11 @@ Used when you are using aeterno programatically.
 
 You may change the name of daemon.
 
+**NOTE:** This is used only when you are using aeterno programatically.
+
+### .setApplicationPath(path [string])
+
+You may manually change the target application path to daemonize.
+
+**NOTE:** This is used only when you are using aeterno programatically.
+

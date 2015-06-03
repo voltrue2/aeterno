@@ -1,5 +1,6 @@
 var a = require('../');
 a.setName('test');
+a.setApplicationPath('test/test.js');
 a.run(function () {
 	var interval = setInterval(function () {
 		console.log(Date.now());
