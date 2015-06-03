@@ -9,7 +9,7 @@
 	},
 	"scripts": {
 		"preinstall": "rm -f ../../aeterno",
-		"install": "ln -fs node_modules/aeterno/aeterno ../../aeterno"
+		"install": "ln -fs node_modules/aeterno/aeterno ../../aeterno && cp node_modules/aeterno/.aeternorc ../../.aeternorc"
 	},
 	"dependencies": {
 		"async": "0.9.0"
