@@ -40,7 +40,16 @@ module.exports = function () {
 			var path = sockName(app.path);
 			fs.stat(path, function (error, stats) {
 				if (error) {
-					return moveOn(error);
+					// we found an app running with aeterno but
+					//with different daemon name -> ignore
+					app.uid = 'unknown';
+					print.out(
+						print.r('<warn>') + 
+						' An application that runs with aeterno ' +
+						'found, but the daemon name is different: ' +
+						app.path
+					);
+					return moveOn();
 				}
 				app.uid = stats.uid;
 				moveOn();
@@ -72,7 +81,7 @@ module.exports = function () {
 						return moveOn(error);
 					}
 					var commandLabel = ' Command		:';
-					var command = 'aeterno {status|start|stop|restart|reload}';
+					var command = '{status|start|stop|restart|reload}';
 					var appPath = print.b(appData.path);
 					var user = print.g(
 						appData.user + ' (uid:' + appData.uid + ')'
@@ -81,7 +90,7 @@ module.exports = function () {
 						' Application path	:',
 						appPath
 					);
-					print.out(commandLabel, command, appPath);
+					print.out(commandLabel, command);
 					print.out(' Executed user		:', user);
 					for (var i = 0, len = list.length; i < len; i++) {
 						var app = list[i].process.replace(process.execPath + ' ', '');
