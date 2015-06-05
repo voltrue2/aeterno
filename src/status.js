@@ -1,7 +1,7 @@
 'use strict';
 
-var print = require('./lib/print');
-var Status = require('./lib/status').Status;
+var print = require('../lib/print');
+var Status = require('../lib/status').Status;
 
 module.exports = function (appPath) {
 	// listener for exceptions

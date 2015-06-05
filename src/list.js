@@ -1,9 +1,9 @@
 var fs = require('fs');
 var exec = require('child_process').exec;
 var async = require('async');
-var print = require('./lib/print');
-var sockName = require('./lib/socket-name');
-var Status = require('./lib/status').Status;
+var print = require('../lib/print');
+var sockName = require('../lib/socket-name');
+var Status = require('../lib/status').Status;
 
 module.exports = function () {
 	// exception
@@ -15,7 +15,7 @@ module.exports = function () {
 	var apps = [];
 	// get list of applications
 	var getAppPaths = function (next) {
-		var monPath = 'aeterno/monitor start ';
+		var monPath = 'aeterno/src/monitor start ';
 		var monPathLen = monPath.length;
 		exec('ps aux | grep "' + monPath + '"', function (error, stdout) {
 			if (error) {

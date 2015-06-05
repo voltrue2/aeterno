@@ -1,11 +1,11 @@
 'use strict';
 
 var fs = require('fs');
-var modName = require('./lib/modname');
-var args = require('./lib/args');
+var modName = require('../lib/modname');
+var args = require('../lib/args');
 var net = require('net');
 var spawn = require('child_process').spawn;
-var socketName = require('./lib/socket-name');
+var socketName = require('../lib/socket-name');
 var path;
 var app;
 var appNameForLog = args.getPath();
@@ -14,11 +14,11 @@ var maxNumOfDeath = 10;
 var deathInterval = 10000;
 var timeOfDeath = 0;
 var deathCount = 0;
-var pkg = require('./package.json');
-var Log = require('./lib/log'); 
+var pkg = require('../package.json');
+var Log = require('../lib/log'); 
 var logger = new Log(args.getLogPath());
 // message
-var Message = require('./lib/message');
+var Message = require('../lib/message');
 
 // if an alternate name is given
 if (args.getName()) {

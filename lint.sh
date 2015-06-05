@@ -14,7 +14,7 @@ name="aeterno";
 cwd=`pwd`;
 # list directories/files to lint
 list=();
-defaultDirList="aeterno index.js start.js stop.js restart.js reload.js status.js monitor.js list.js clean.js lib/";
+defaultDirList="aeterno index.js src/ lib/";
 # optional space separated list of directories/files to lint
 # Example: ./lint.sh "mydir/ myFile" > this will lint all files in mydir/ and lint myFile
 dirList=$1;

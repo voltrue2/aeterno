@@ -1,9 +1,9 @@
 'use strict';
 
-var modName = require('./lib/modname');
-var print = require('./lib/print');
+var modName = require('../lib/modname');
+var print = require('../lib/print');
 var run = require('child_process').spawn;
-var Status = require('./lib/status').Status;
+var Status = require('../lib/status').Status;
 var root = __dirname;
 
 module.exports = function (path, logPath, autoReload) {
