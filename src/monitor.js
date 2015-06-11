@@ -244,6 +244,7 @@ function handleMessage(parsed) {
 		case 'status':
 			message.send({
 				monitorVersion: pkg.version,
+				name: modName.get(),
 				path: app.path,
 				pid: app.pid,
 				started: app.started,

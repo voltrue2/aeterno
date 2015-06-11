@@ -70,41 +70,19 @@ module.exports = function () {
 	};
 	// find applications and their pids
 	var findApps = function (next) {
-		async.eachSeries(apps, function (appData, moveOn) {
-			var status = new Status(appData.path);
-			status.findProcessList(function (error, processList) {
-				if (error) {
-					return moveOn(error);
-				}
-				status.getPids(processList, function (error, list) {
-					if (error) {
-						return moveOn(error);
-					}
-					var commandLabel = ' Command		:';
-					var command = '{status|start|stop|restart|reload}';
-					var appPath = print.b(appData.path);
-					var user = print.g(
-						appData.user + ' (uid:' + appData.uid + ')'
-					);
-					print.out(
-						' Application path	:',
-						appPath
-					);
-					print.out(commandLabel, command);
-					print.out(' Executed user		:', user);
-					for (var i = 0, len = list.length; i < len; i++) {
-						var app = list[i].process.replace(process.execPath + ' ', '');
-						var pid = '(' + list[i].pid + ')';
-						var label = ' Application process	: ';
-						if (app.indexOf('monitor start') !== -1) {
-							label = ' Monitor process	: ';
-						}
-						print.out(label + app, pid);
-					}
-					moveOn();
-				});
+		async.eachSeries(apps, findApp, next);
+	};
+	var findApp = function (appData, cb) {
+		var st = new Status(appData.path);
+		st.setup(function () {
+			if (!st.isRunning) {
+				return cb();
+			}
+			st.getStatus(function (data, list) {
+				st.outputStatus(data, list);
+				cb();
 			});
-		}, next);
+		});
 	};
 	var done = function (error) {
 		if (error) {
