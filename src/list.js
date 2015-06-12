@@ -75,7 +75,6 @@ module.exports = function () {
 		async.eachSeries(apps, findApp, next);
 	};
 	var findApp = function (appData, cb) {
-		modName.set(appData.name);
 		var st = new Status(appData.path);
 		st.setup(function () {
 			if (!st.isRunning) {

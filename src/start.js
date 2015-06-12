@@ -6,7 +6,7 @@ var run = require('child_process').spawn;
 var Status = require('../lib/status').Status;
 var root = __dirname;
 
-module.exports = function (path, logPath, autoReload) {
+module.exports = function (path, logPath, autoReload, execPath) {
 	// listener for exceptions
 	process.on('uncaughtException', function (error) {
 		print.error(print.r(error.message));
@@ -24,7 +24,9 @@ module.exports = function (path, logPath, autoReload) {
 			'start',
 			path,
 			'-n',
-			modName.get()
+			modName.get(),
+			'-e',
+			execPath
 		];
 		if (logPath) {
 			args.push('-l');
