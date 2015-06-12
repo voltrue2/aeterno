@@ -8,6 +8,8 @@ This module can be used programatically.
 
 ## How To Install
 
+**NOTE:** If you are running your application with older version of aeterno, please make sure to stop all the daemons before installing the new version.
+
 ```
 npm install aeterno
 ```
