@@ -7,6 +7,8 @@
 			"options": "Options:",
 			"log": "       -l, --log=[path]:",
 			"logDesc": "  Write log data into a file",
+			"exec": "       -e, --exec=[path]:",
+			"execDesc": " Daemonize the target application with the given interpreter.",
 			"watch": "       -w, -a:",
 			"watchDesc": "            Automatically restart the daemon process if watch file(s) change.",
 			"verbose": "       -v, --verbose:",

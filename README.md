@@ -165,6 +165,18 @@ Be more verbose.
 
 Writes log data in the given directory
 
+#### -e [PATH], --exec=[PATH]
+
+Daemonize the target application with the given interpreter.
+
+Example:
+
+```
+./aeterno start myapp.py -e python
+```
+
+The above example will daemonize a python script.
+
 #### -w [PATH] [PATH] ..., -a [PATH] [PATH]
 
 Watch changes in the given directories and/or files to auto-restart.
