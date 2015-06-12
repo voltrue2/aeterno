@@ -94,7 +94,7 @@ function handleCommunication(msg) {
 
 function startApp() {
 	// start the application process
-	app = spawn(process.execPath, [path], { detached: true, stdio: 'ignore' });
+	app = spawn(args.getExec(), [path], { detached: true, stdio: 'ignore' });
 	app.path = path;
 	app.started = Date.now();
 	app.reloaded = app.started;
@@ -244,6 +244,7 @@ function handleMessage(parsed) {
 		case 'status':
 			message.send({
 				monitorVersion: pkg.version,
+				exec: args.getExec(),
 				name: modName.get(),
 				path: app.path,
 				pid: app.pid,
