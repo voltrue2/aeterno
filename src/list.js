@@ -3,6 +3,7 @@ var exec = require('child_process').exec;
 var async = require('async');
 var print = require('../lib/print');
 var sockName = require('../lib/socket-name');
+var modName = require('../lib/modname');
 var Status = require('../lib/status').Status;
 
 module.exports = function () {
@@ -25,6 +26,7 @@ module.exports = function () {
 			for (var i = 0, len = list.length; i < len; i++) {
 				if (list[i].indexOf(process.execPath) !== -1) {
 					apps.push({
+						name: modName.getNameFromPath(list[i]),
 						path: list[i].substring(
 							list[i].lastIndexOf(monPath) + monPathLen
 						).split(' ')[0]
@@ -37,7 +39,7 @@ module.exports = function () {
 	// find owner uid
 	var findUidForApps = function (next) {
 		async.each(apps, function (app, moveOn) {
-			var path = sockName(app.path);
+			var path = sockName(app.path, app.name);
 			fs.stat(path, function (error, stats) {
 				if (error) {
 					// we found an app running with aeterno but
@@ -73,12 +75,15 @@ module.exports = function () {
 		async.eachSeries(apps, findApp, next);
 	};
 	var findApp = function (appData, cb) {
+		modName.set(appData.name);
 		var st = new Status(appData.path);
 		st.setup(function () {
 			if (!st.isRunning) {
 				return cb();
 			}
 			st.getStatus(function (data, list) {
+				data.user = appData.user;
+				data.uid = appData.uid;
 				st.outputStatus(data, list);
 				cb();
 			});
