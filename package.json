@@ -46,6 +46,7 @@
                         "afterEach": false
                 }
         },
+	"license": "MIT",
 	"contributors": [],
 	"keywords": [
 		"daemon",
