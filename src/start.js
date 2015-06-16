@@ -51,7 +51,7 @@ module.exports = function (path, logPath, autoReload, execPath) {
 			if (running) {
 				print.out(
 					'Daemon process started:',
-					print.b(path),
+					print.p(path),
 					'[ ' + print.g('OK') + ' ]'
 				);
 				print.out(
