@@ -222,7 +222,7 @@ Default Vaule:
 ```
 {
         "name": "aeterno",
-	"color": true,
+        "color": true,
         "help": {
                         "usage": "Usage: ./aeterno {start|stop|restart|reload|status|list|clean} [PATH] [OPTION]",
                         "reloadNote": "{reload} works ONLY if your application handles SIGHUP.",
