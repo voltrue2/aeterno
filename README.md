@@ -4,7 +4,9 @@
 
 A daemonazation module written in node.js.
 
-This module can be used programatically.
+`aeterno` can be used programatically.
+
+`aeterno` can also daemonize applications that are not written in javascript as well. 
 
 ## How To Install
 
