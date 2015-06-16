@@ -181,7 +181,7 @@ Example:
 
 The above example will daemonize a python script.
 
-#### -w [PATH] [PATH] ..., -a [PATH] [PATH]
+#### -w [PATH] [PATH] ..., -a [PATH] [PATH] ...
 
 Watch changes in the given directories and/or files to auto-restart.
 
