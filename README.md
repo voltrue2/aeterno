@@ -213,6 +213,8 @@ The configurable values are:
 
 - Daemon tool name. This will have the same effect as calling `aeterno.setName();`.
 
+- Output color. Use colored output text. Default is true.
+
 - Help text content.
 
 Default Vaule:
@@ -220,6 +222,7 @@ Default Vaule:
 ```
 {
         "name": "aeterno",
+	"color": true,
         "help": {
                         "usage": "Usage: ./aeterno {start|stop|restart|reload|status|list|clean} [PATH] [OPTION]",
                         "reloadNote": "{reload} works ONLY if your application handles SIGHUP.",
