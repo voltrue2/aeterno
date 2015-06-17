@@ -4,7 +4,29 @@ This is a list of manually mantained changes and updates for each version.
 
 ***
 
-Version 0.3.3
+## Version 0.3.4
+
+### Added
+
+None
+
+### Changed
+
+#### Output text for running hours in status and list command improved
+
+Now it displays www days xx hours yy minutes zz seconds instead of just hours.
+
+### Deprecated
+
+None
+
+### Removed
+
+None 
+
+***
+
+## Version 0.3.3
 
 ### Added
 
@@ -20,7 +42,7 @@ Version 0.3.3
 
 ***
 
-Version 0.3.2
+## Version 0.3.2
 
 ### Added
 
@@ -38,7 +60,7 @@ Version 0.3.2
 
 ***
 
-Version 0.3.1
+## Version 0.3.1
 
 ### Added
 
@@ -54,7 +76,7 @@ Version 0.3.1
 
 ***
 
-Version 0.3.0
+## Version 0.3.0
 
 ### Added
 
@@ -68,7 +90,7 @@ Version 0.3.0
 
 ***
 
-Version 0.2.7
+## Version 0.2.7
 
 ### Added
 
