@@ -16,6 +16,8 @@ None
 
 Now it displays www days xx hours yy minutes zz seconds instead of just hours.
 
+#### status and list command no longer leave log
+
 ### Deprecated
 
 None

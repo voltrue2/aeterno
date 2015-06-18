@@ -234,9 +234,6 @@ function parseCommand(cmd) {
 }
 
 function handleMessage(parsed) {
-
-	logger.info('message command: ' + parsed.command + ' [name: ' + modName.get() + ']');
-		
 	var message = new Message(parsed.value);
 	message.startSend();
 
