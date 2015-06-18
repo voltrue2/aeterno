@@ -153,15 +153,10 @@ function startApp() {
 
 function stopApp(cb) {
 	if (app) {
-		// restart logger to make sure log file is rotated
-		logger.restart(function () {
-			// stop application
-			app.kill();
-			logger.info('Stopped daemon process of ' + app.path);
-			if (cb) {
-				cb();
-			}
-		});
+		// stop application
+		app.kill();
+		logger.info('Stopped daemon process of ' + app.path + (app.restart ? ' to restart' : ''));
+		logger.stop(null, cb);
 		return;
 	}
 	if (cb) {
@@ -171,26 +166,23 @@ function stopApp(cb) {
 
 function reloadApp(cb) {
 	if (app) {
-		// restart logger to make sure log file is rotated
-		logger.restart(function () {
-			// stop application
-			app.reloaded = Date.now();
-			app.reloadedCount += 1;
-			// try to get gracenode version of the application if present
-			var fileName = path.substring(path.lastIndexOf('/') + 1);
-			try {
-				var pkg = require(path.replace(fileName, '') + 'package.json');
-				app.version = pkg && pkg.version ? pkg.version : 'Unknown';
-			} catch (error) {
-				logger.error(app.path + ' does not have a package.json [this error is not a fatal error]');
-				app.version = 'Unknown';
-			}
-			app.kill('SIGHUP');
-			logger.info('Reloading daemon process of ' + app.path);
-			if (cb) {
-				cb();
-			}
-		});
+		// stop application
+		app.reloaded = Date.now();
+		app.reloadedCount += 1;
+		// try to get gracenode version of the application if present
+		var fileName = path.substring(path.lastIndexOf('/') + 1);
+		try {
+			var pkg = require(path.replace(fileName, '') + 'package.json');
+			app.version = pkg && pkg.version ? pkg.version : 'Unknown';
+		} catch (error) {
+			logger.error(app.path + ' does not have a package.json [this error is not a fatal error]');
+			app.version = 'Unknown';
+		}
+		app.kill('SIGHUP');
+		logger.info('Reloading daemon process of ' + app.path);
+		if (cb) {
+			cb();
+		}
 		return;
 	}
 	if (cb) {

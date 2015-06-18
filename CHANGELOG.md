@@ -18,6 +18,8 @@ Now it displays www days xx hours yy minutes zz seconds instead of just hours.
 
 #### status and list command no longer leave log
 
+#### daemon logging now uses gracelog
+
 ### Deprecated
 
 None
