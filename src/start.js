@@ -28,11 +28,15 @@ module.exports = function (path, logPath, autoReload, execPath) {
 			'-e',
 			execPath
 		];
+
 		if (logPath) {
 			args.push('-l');
 			args.push(logPath);
 			print.out('Logging in', logPath);
+		} else {
+			print.out(print.r('<WARNING> Starting daemon with logging option is recommanded.'));
 		}
+		
 		if (autoReload.length) {
 			args.push('-w');
 			for (var i = 0, len = autoReload.length; i < len; i++) {

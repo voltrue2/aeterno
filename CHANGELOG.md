@@ -20,6 +20,10 @@ Now it displays www days xx hours yy minutes zz seconds instead of just hours.
 
 #### daemon logging now uses gracelog
 
+#### status and list command outputs logging path
+
+#### Starting a daemon process without logging option will output a warning
+
 ### Deprecated
 
 None
