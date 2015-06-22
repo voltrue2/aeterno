@@ -12,7 +12,7 @@ None
 
 ## Changed
 
-#### status/list textoutput improved
+#### status/list text output improved
 
 It the application is running with worker processes, it displays as a tree structure.
 
