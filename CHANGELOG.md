@@ -12,6 +12,10 @@ None
 
 ## Changed
 
+#### -l, --log=[path] can now be used with other commands than start
+
+status, restart, and reload can now add/change logging path to currently running daemon application.
+
 #### status/list text output improved
 
 It the application is running with worker processes, it displays as a tree structure.

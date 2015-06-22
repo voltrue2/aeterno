@@ -81,8 +81,8 @@ module.exports = function () {
 				return cb();
 			}
 			st.getStatus(function (data, list) {
-				data.user = appData.user;
-				data.uid = appData.uid;
+				data.user = appData.user || 'Unknown';
+				data.uid = appData.uid || 'Unknown';
 				st.outputStatus(data, list);
 				cb();
 			});

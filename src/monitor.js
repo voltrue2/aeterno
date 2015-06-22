@@ -220,7 +220,7 @@ function setupAutoReloading(path, dirListToWatch) {
 function parseCommand(cmd) {
 	var sep = cmd.split('\t');
 	if (sep[0] === 'message' && sep[1] && sep[2]) {
-		return { command: sep[1], value: sep[2] };
+		return { command: sep[1], value: sep[2], option: sep[3] || null };
 	}
 	return false;
 }
@@ -235,12 +235,25 @@ function handleMessage(parsed) {
 				monitorVersion: pkg.version,
 				exec: args.getExec(),
 				name: modName.get(),
+				logPath: logger.getPath(),
 				path: app.path,
 				pid: app.pid,
 				started: app.started,
 				reloaded: app.reloaded,
 				numOfRestarted: deathCount,
 				reloadedCount: app.reloadedCount
+			});
+			break;
+		case 'addlog':
+			var prevPath = logger.getPath();
+			logger.stop(null, function () {
+				logger = new Log(parsed.option);
+				logger.start(appNameForLog, function () {				
+					message.send({
+						prevLogPath: prevPath,
+						currentLogPath: logger.getPath()
+					});
+				});
 			});
 			break;
 		default:
