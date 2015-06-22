@@ -4,6 +4,30 @@ This is a list of manually mantained changes and updates for each version.
 
 ***
 
+## Version 0.3.5
+
+## Added
+
+None
+
+## Changed
+
+#### status/list textoutput improved
+
+It the application is running with worker processes, it displays as a tree structure.
+
+Text output for the running processes and monitor are shorter now.
+
+## Deprecated
+
+None
+
+## Removed
+
+None
+
+***
+
 ## Version 0.3.4
 
 ### Added
