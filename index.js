@@ -15,6 +15,7 @@ exports.setApplicationPath = function (path) {
 };
 
 exports.run = function (cb) {
+	// module.parent.filename = file that requires aeterno
 	exec.appPath = appPath || module.parent.filename;
 	exec.run(cb);
 };
