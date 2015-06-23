@@ -4,7 +4,7 @@ This is a list of manually mantained changes and updates for each version.
 
 ***
 
-## Version 0.3.6
+## Version 0.4.0
 
 ### Added
 
