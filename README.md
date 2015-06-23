@@ -143,6 +143,20 @@ Example
 ./aeterno list
 ```
 
+## How To Add/Change Logging Path
+
+You may add or change daemon log path.
+
+Example:
+
+```
+./aeterno status myapp.js -l /my/new/log/path/
+```
+
+Above example will change the logging path to `/my/new/log/path/`.
+
+It will add logging if the target daemon is not logging.
+
 ## Commands And Options
 
 ### Commands
