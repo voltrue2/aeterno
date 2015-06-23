@@ -81,8 +81,12 @@ module.exports = function () {
 				return cb();
 			}
 			st.getStatus(function (data, list) {
-				data.user = appData.user || 'Unknown';
-				data.uid = appData.uid || 'Unknown';
+				if (!data) {
+					// cannot find the app
+					return cb();
+				}
+				data.user = appData.user;
+				data.uid = appData.uid;
 				st.outputStatus(data, list);
 				cb();
 			});

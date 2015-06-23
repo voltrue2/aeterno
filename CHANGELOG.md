@@ -4,13 +4,37 @@ This is a list of manually mantained changes and updates for each version.
 
 ***
 
-## Version 0.3.5
+## Version 0.3.6
 
-## Added
+### Added
 
 None
 
-## Changed
+### Changed
+
+#### Fixed list/status command to break when the command cannot find running daemon application
+
+`list` and `status` used to break when you execute it while the daemon is restarting.
+
+This issue has now been fixed.
+
+### Deprecated 
+
+None
+
+### Removed
+
+None
+
+***
+
+## Version 0.3.5
+
+### Added
+
+None
+
+### Changed
 
 #### -l, --log=[path] can now be used with other commands than start
 
@@ -22,11 +46,11 @@ It the application is running with worker processes, it displays as a tree struc
 
 Text output for the running processes and monitor are shorter now.
 
-## Deprecated
+### Deprecated
 
 None
 
-## Removed
+### Removed
 
 None
 
