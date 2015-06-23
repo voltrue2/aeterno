@@ -8,7 +8,18 @@ This is a list of manually mantained changes and updates for each version.
 
 ### Added
 
-None
+#### stopall command added
+
+With `stopall` command, you can stop all daemons that runs with `aeterno`.
+
+This command will check each running daemon process and ask you if you want to stop it or not.
+
+Example:
+
+```
+./aeterno stopall
+
+```
 
 ### Changed
 

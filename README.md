@@ -63,6 +63,14 @@ node myApp.js status
 node myApp.js stop
 ```
 
+##### Stop all daemons
+
+Stops all daemon processes that runs with `aeterno`.
+
+```
+node myApp.js stopall
+```
+
 ##### Restart the daemon
 
 ```
@@ -115,6 +123,14 @@ Example
 
 ```
 ./aeterno stop /path/to/your/app/
+```
+
+##### Stop all daemons
+
+Stop all daemons that runs with `aeterno`.
+
+```
+./aeterno stopall
 ```
 
 ##### Restart your daemon
