@@ -7,7 +7,7 @@
 			"description": "Daemonaize a target application process and monitor it.\n",
 			"options": "Options:",
 			"log": "       -l, --log=[path]:",
-			"logDesc": "  Write log data into a file",
+			"logDesc": "  Write log data into a file.",
 			"exec": "       -e, --exec=[path]:",
 			"execDesc": " Daemonize the target application with the given interpreter.",
 			"watch": "       -w, -a:",
