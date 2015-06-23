@@ -187,6 +187,8 @@ It will add logging if the target daemon is not logging.
 
 #### reload [PATH]
 
+#### stopall
+
 #### list
 
 ### Options
