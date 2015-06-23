@@ -23,7 +23,7 @@ Example:
 
 ### Changed
 
-#### Fixed list/status command to break when the command cannot find running daemon application
+#### Fixed: list/status command breaks when the command cannot find running daemon application
 
 `list` and `status` used to break when you execute it while the daemon is restarting.
 
