@@ -67,7 +67,7 @@ node myApp.js stop
 
 Stops all daemon processes that runs with `aeterno`.
 
-**NOTE:** This command will ask the user if it is OK to stop each process. If you do not wish to enter user input to stop all daemons, then use `-f` option.
+**NOTE:** Each daemon process requires user input to stop the process. If you do not wish to enter user input to stop all daemons, then use `-f` option.
 
 ```
 node myApp.js stopall
@@ -131,7 +131,7 @@ Example
 
 Stop all daemons that runs with `aeterno`.
 
-**NOTE:** This command will ask the user if it is OK to stop each process. If you do not wish to enter user input to stop all daemons, then use `-f` option.
+**NOTE:** Each daemon process requires user input to stop the process. If you do not wish to enter user input to stop all daemons, then use `-f` option.
 
 ```
 ./aeterno stopall
