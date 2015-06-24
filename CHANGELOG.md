@@ -4,6 +4,26 @@ This is a list of manually mantained changes and updates for each version.
 
 ***
 
+## Version 0.4.1
+
+### Added
+
+None
+
+### Changed
+
+#### FIX: logging does not leave log for daemon stop
+
+### Deprecated
+
+None
+
+### Removed
+
+None
+
+***
+
 ## Version 0.4.0
 
 ### Added

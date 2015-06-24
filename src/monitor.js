@@ -153,10 +153,14 @@ function startApp() {
 
 function stopApp(cb) {
 	if (app) {
-		// stop application
-		app.kill();
 		logger.info('Stopped daemon process of ' + app.path + (app.restart ? ' to restart' : ''));
-		logger.stop(null, cb);
+		logger.stop(null, function () {
+			// stop application
+			app.kill();
+			if (cb) {
+				cb();
+			}
+		});
 		return;
 	}
 	if (cb) {
@@ -253,13 +257,22 @@ function handleMessage(parsed) {
 						prevLogPath: prevPath,
 						currentLogPath: logger.getPath()
 					});
+					logger.info(
+						'logging added/changed from ' + 
+						prevPath + ' to ' +
+						logger.getPath()
+					);
 				});
 			});
 			break;
 		default:
 			message.send({
-				error: 'unkownCommand'
-			});		
+				error: {
+					type: 'unkownCommand',
+					message: parsed.command + ' command given'
+				}
+			});
+			logger.error('unknown command given: ' + parsed.command);	
 			break;
 	}
 }
