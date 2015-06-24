@@ -14,6 +14,14 @@ None
 
 #### FIX: logging does not leave log for daemon stop
 
+When logging path is added to a currently running daemon and the daemon is stopped, it used to not leave log data for stopping.
+
+This issue has now been fixed.
+
+#### FIX: executing commands with the path as "index.js" fails
+
+It can now handle a path that is just `index.js`.
+
 ### Deprecated
 
 None
