@@ -21,6 +21,8 @@ Example:
 
 ```
 
+#### -f option added for stopall command
+
 ### Changed
 
 #### Fixed: list/status command breaks when the command cannot find running daemon application

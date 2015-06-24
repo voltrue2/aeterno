@@ -14,6 +14,8 @@
 			"watchDesc": "            Automatically restart the daemon process if watch file(s) change.",
 			"verbose": "       -v, --verbose:",
 			"verboseDesc": "     Be more verbose.",
+			"forced": "       -f:",
+			"forcedDesc": "                Stops all running daemon processes without user inputs. This option is for {stopall} command only.",
 			"example": "Examples:",
 			"start": "     ./aeterno start",
 			"startDesc": "                       Start a daemon process.",

@@ -1,5 +1,6 @@
 var exec = require('child_process').exec;
 var async = require('async');
+var args = require('../lib/args');
 var print = require('../lib/print');
 var modName = require('../lib/modname');
 var Status = require('../lib/status').Status;
@@ -56,7 +57,7 @@ module.exports = function () {
 		print.out('\n');
 
 		for (var i = 0, len = res.stopped.length; i < len; i++) {
-			print.out('Stopped: ' + print.p(res.stopped[i]));
+			print.out(print.g('Stopped: ') + print.p(res.stopped[i]));
 		}
 		for (var j = 0, jen = res.skipped.length; j < jen; j++) {
 			print.out(print.r('Skipped: ') + print.p(res.skipped[j]));
@@ -87,14 +88,23 @@ function stopDaemon(item, cb) {
 
 		status.getStatus(function (data, list) {
 			
+			if (args.isForced()) {
+				// stop daemon without user input
+				print.out(
+					'Stopping with option -f ' +
+					print.p(item.path)
+				);
+				res.stopped.push(item.path);
+				status.stop(cb);
+				return;
+			}
+			// stop daemon with user input	
 			status.outputStatus(data, list);
-
 			process.stdout.write(
 				'Are you sure you want to stop ' +
 				'[ ' + print.p(item.path) + ' ]? ' +
 				'Type [y/n]: '
 			);
-
 			process.stdin.once('data', function (data) {
 				if (data === 'y\n') {
 					print.out(

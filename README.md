@@ -217,6 +217,10 @@ The above example will daemonize a python script.
 
 Watch changes in the given directories and/or files to auto-restart.
 
+#### -f
+
+This option is for `stopall` command only. 
+
 #### -h, --help
 
 ## Methods
@@ -256,18 +260,20 @@ Default Vaule:
         "name": "aeterno",
         "color": true,
         "help": {
-                        "usage": "Usage: ./aeterno {start|stop|restart|reload|status|list|clean} [PATH] [OPTION]",
+                        "usage": "Usage: ./aeterno {start|stop|stopall|restart|reload|status|list|clean} [PATH] [OPTION]",
                         "reloadNote": "{reload} works ONLY if your application handles SIGHUP.",
                         "description": "Daemonaize a target application process and monitor it.\n",
                         "options": "Options:",
                         "log": "       -l, --log=[path]:",
-                        "logDesc": "  Write log data into a file",
+                        "logDesc": "  Write log data into a file.",
                         "exec": "       -e, --exec=[path]:",
                         "execDesc": " Daemonize the target application with the given interpreter.",
                         "watch": "       -w, -a:",
                         "watchDesc": "            Automatically restart the daemon process if watch file(s) change.",
                         "verbose": "       -v, --verbose:",
                         "verboseDesc": "     Be more verbose.",
+                        "forced": "       -f:",
+                        "forcedDesc": "                Stops all running daemon processes without user inputs. This option is for {stopall} command only.",
                         "example": "Examples:",
                         "start": "     ./aeterno start",
                         "startDesc": "                       Start a daemon process.",
