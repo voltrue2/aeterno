@@ -12,6 +12,10 @@ None
 
 ### Changed
 
+#### Improved application path finding
+
+The logic to determine the target application's path has been improved and now it can find the correct path even if `aeterno` is a dependency of dependencies.
+
 #### FIX: logging does not leave log for daemon stop
 
 When logging path is added to a currently running daemon and the daemon is stopped, it used to not leave log data for stopping.

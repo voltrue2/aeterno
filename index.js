@@ -4,6 +4,7 @@
 
 var modName = require('./lib/modname');
 var exec = require('./lib/exec');
+var parent = require('./lib/parent');
 var appPath;
 
 exports.setName = function (name) {
@@ -15,7 +16,10 @@ exports.setApplicationPath = function (path) {
 };
 
 exports.run = function (cb) {
-	// module.parent.filename = file that requires aeterno
-	exec.appPath = appPath || module.parent.filename;
+	/*
+	by default aeterno will find the topmost file
+	and use it as the execution script file path
+	*/
+	exec.appPath = appPath || parent.getTopmostParent();
 	exec.run(cb);
 };
