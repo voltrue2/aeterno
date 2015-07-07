@@ -12,7 +12,13 @@ None
 
 ### Changed
 
+#### list/status command can now display a list of watched files/directories
+
+When you start your daemon with `-a` or `-w`, list/status command will display which files/directories your daemon is watching your auto-reload.
+
 #### list/status command text output for running days will now be formatted
+
+#### list/status text output aligment for reloaded time fixed
 
 ### Deprecated
 
