@@ -245,7 +245,8 @@ function handleMessage(parsed) {
 				started: app.started,
 				reloaded: app.reloaded,
 				numOfRestarted: deathCount,
-				reloadedCount: app.reloadedCount
+				reloadedCount: app.reloadedCount,
+				watching: args.getWatchList()
 			});
 			break;
 		case 'addlog':

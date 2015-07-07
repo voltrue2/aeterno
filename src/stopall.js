@@ -108,14 +108,14 @@ function stopDaemon(item, cb) {
 			process.stdin.once('data', function (data) {
 				if (data === 'y\n') {
 					print.out(
-						'Stopping ' +
+						print.g('Stopping ') +
 						print.p(item.path)
 					);
 					res.stopped.push(item.path);
 					return status.stop(cb);
 				}
 				res.skipped.push(item.path);
-				print.out('Skipping ' + print.p(item.path));
+				print.out(print.r('Skipping ') + print.p(item.path));
 				cb();
 			});
 		});
