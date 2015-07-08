@@ -4,6 +4,26 @@ This is a list of manually mantained changes and updates for each version.
 
 ***
 
+## Version 0.4.3
+
+## Added
+
+None
+
+## Changed
+
+#### list/status command text output: Order of processes is now forced and fixed
+
+## Deprecated
+
+None
+
+## Removed
+
+None
+
+***
+
 ## Version 0.4.2
 
 ### Added
