@@ -12,6 +12,10 @@ None
 
 ### Changed
 
+#### FIX: -w, -a auto-reload for recursive detection fixed
+
+When watching multi-layered directories for auto-reload, it was not working properly, but now this issue is fixed.
+
 #### list/status command can now display a list of watched files/directories
 
 When you start your daemon with `-a` or `-w`, list/status command will display which files/directories your daemon is watching your auto-reload.

@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs');
+var dir = require('../lib/dir');
 var modName = require('../lib/modname');
 var args = require('../lib/args');
 var net = require('net');
@@ -50,7 +51,7 @@ logger.start(appNameForLog, function () {
 });
 
 function handleExit(error) {
-	logger.error('Monitor process terminated with an error:' + error.message + '\n' + error.stack);
+	logger.error('Monitor process terminated with an error: ' + error.message + '\n' + error.stack);
 	fs.unlink(socketName(path), function (err) {
 		if (err) {
 			return logger.error('Failed to remove socket file: ' + err.message + '\n' + err.stack);
@@ -202,19 +203,34 @@ function setupAutoReloading(path, dirListToWatch) {
 		// no optional directories to watch given: watch the applicaiton root for auto-reloading 
 		list.push(appRoot);
 	}
-	var reloader = function (event) {
+	
+	var delegate = function (targetPath) {
+		return function (event) {
+			reloader(event, targetPath);
+		};
+	};
+
+	var reloader = function (event, filename) {
 		if (event === 'change') {
 			reloadApp(function () {
-				logger.info('Change in watched directories detected: auto-reloaded daemon process of ' + path);
+				logger.info(
+					'Change in watched directories detected [' +
+					filename + ']: auto-reloaded daemon process of ' + path
+				);
 			});
 		}
 	};
+
 	// set up the watcher
+	var watchList = [];
+	for (var i = 0, len = list.length; i < len; i++) {
+		var dirPath = list[i].indexOf(appRoot) === -1 ? appRoot + '/' + list[i] : list[i];
+		watchList = dir(dirPath).concat(watchList);
+	}
 	try {
-		for (var i = 0, len = list.length; i < len; i++) {
-			var dirPath = list[i].indexOf(appRoot) === -1 ? appRoot + '/' + list[i] : list[i];
-			fs.watch(dirPath, reloader);
-			logger.info('Auto-reload set up for ' + path + ' on ' + dirPath);
+		for (var j = 0, jen = watchList.length; j < jen; j++) {
+			fs.watch(watchList[j], delegate(watchList[j]));
+			logger.info('Auto-reload set up for ' + path + ' on ' + watchList[j]);
 		}
 	} catch (error) {
 		logger.error('Failed to set up auto-reload watcher: ' + error.message);
