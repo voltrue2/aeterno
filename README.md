@@ -79,6 +79,16 @@ node myApp.js stopall
 node myApp.js restart
 ```
 
+##### Restart all daemons
+
+Restarts all daemon processes that runs with `aeterno`.
+
+**NOTE:** Each daemon process requires user input to restart the process. If you do not wish to enter user input to restart all daemons, then use `-f` option.
+
+```
+node myApp.js restartall
+```
+
 ##### Reload the daemon
 
 **NOTE:** This command works only if your application listens for `SIGHUP` and reloads properly.
@@ -143,6 +153,16 @@ Stop all daemons that runs with `aeterno`.
 ./aeterno restart /path/to/your/app/
 ```
 
+##### Restart all daemons
+
+Restart all daemons that runs with `aeterno`.
+
+**NOTE:** Each daemon process requires user input to restart the process. If you do not wish to enter user input to restart all daemons, then use `-f` option.
+
+```
+./aeterno restartall
+```
+
 ##### Reload your daemon
 
 **NOTE:** `reload` only works if your application listenes to `SIGHUP` and handles it as reload.
@@ -193,6 +213,8 @@ It will add logging if the target daemon is not logging.
 
 #### stopall
 
+#### restartall
+
 #### list
 
 ### Options
@@ -223,7 +245,7 @@ Watch changes in the given directories and/or files to auto-restart.
 
 #### -f
 
-This option is for `stopall` command only. 
+This option is for `stopall` or `restartall` command only. 
 
 #### -h, --help
 
@@ -264,7 +286,7 @@ Default Vaule:
         "name": "aeterno",
         "color": true,
         "help": {
-                        "usage": "Usage: ./aeterno {start|stop|stopall|restart|reload|status|list|clean} [PATH] [OPTION]",
+                        "usage": "Usage: ./aeterno {start|stop|stopall|restart|restartall|reload|status|list|clean} [PATH] [OPTION]",
                         "reloadNote": "{reload} works ONLY if your application handles SIGHUP.",
                         "description": "Daemonaize a target application process and monitor it.\n",
                         "options": "Options:",
@@ -277,7 +299,7 @@ Default Vaule:
                         "verbose": "       -v, --verbose:",
                         "verboseDesc": "     Be more verbose.",
                         "forced": "       -f:",
-                        "forcedDesc": "                Stops all running daemon processes without user inputs. This option is for {stopall} command only.",
+                        "forcedDesc": "                Stops or restart all running daemon processes without user inputs. This option is for {stopall|restartall} command only.",
                         "example": "Examples:",
                         "start": "     ./aeterno start",
                         "startDesc": "                       Start a daemon process.",
