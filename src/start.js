@@ -1,5 +1,7 @@
 'use strict';
 
+var fs = require('fs');
+var libargs = require('../lib/args');
 var modName = require('../lib/modname');
 var print = require('../lib/print');
 var run = require('child_process').spawn;
@@ -26,7 +28,8 @@ module.exports = function (path, logPath, autoReload, execPath) {
 			'-n',
 			modName.get(),
 			'-e',
-			execPath
+			execPath,
+			libargs.passOptionsToApp(path)
 		];
 
 		if (logPath) {
@@ -40,8 +43,9 @@ module.exports = function (path, logPath, autoReload, execPath) {
 		if (autoReload.length) {
 			args.push('-w');
 			for (var i = 0, len = autoReload.length; i < len; i++) {
+				print.out('Watching for auto-reload:', autoReload[i]);
+				fs.statSync(autoReload[i]);
 				args.push(autoReload[i]);
-				print.out('Watching:', autoReload[i]);
 			}
 			print.out('Auto-restart enabled:');
 		}

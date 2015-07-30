@@ -95,7 +95,7 @@ function handleCommunication(msg) {
 
 function startApp() {
 	// start the application process
-	app = spawn(args.getExec(), [path], { detached: true, stdio: 'ignore' });
+	app = spawn(args.getExec(), [path, args.getOptionsForApp()], { detached: true, stdio: 'ignore' });
 	app.path = path;
 	app.started = Date.now();
 	app.reloaded = app.started;

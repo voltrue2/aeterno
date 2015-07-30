@@ -15,6 +15,11 @@ describe('Daemon tests ->', function () {
 	it('Starts a daemon', function (done) {
 		var start = function (next) {
 			exec(command + ' start ', function (err, out) {
+
+				if (err) {
+					console.error(err);
+				}
+
 				assert.equal(err, null);
 				assert(out);
 				next();
@@ -183,7 +188,7 @@ describe('Daemon tests ->', function () {
 
 	});
 
-	it('Cannot view the satus of daemon that is not running', function (done) {
+	it('Cannot view the status of daemon that is not running', function (done) {
 		status(false, done);
 	});
 

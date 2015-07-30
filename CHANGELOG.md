@@ -4,11 +4,35 @@ This is a list of manually mantained changes and updates for each version.
 
 ***
 
+Version 0.4.4
+
+## Added
+
+#### Now supports command-line options
+
+aeterno now passes command-line options to daemon application.
+
+#### Added checks for auto-reload files/directories
+
+## Changed
+
+#### Minor improvements
+
+## Deprecated
+
+None
+
+## Removed
+
+None
+
+***
+
 ## Version 0.4.3
 
 ## Added
 
-#### startall command added
+#### restartall command added
 
 ## Changed
 
