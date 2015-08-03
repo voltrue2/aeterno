@@ -4,6 +4,26 @@ This is a list of manually mantained changes and updates for each version.
 
 ***
 
+Version 0.4.5
+
+## Added
+
+#### Added daemon application start options to status output
+
+## Changed
+
+None
+
+## Deprecated
+
+None
+
+## Removed
+
+None
+
+***
+
 Version 0.4.4
 
 ## Added

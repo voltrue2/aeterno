@@ -262,7 +262,8 @@ function handleMessage(parsed) {
 				reloaded: app.reloaded,
 				numOfRestarted: deathCount,
 				reloadedCount: app.reloadedCount,
-				watching: args.getWatchList()
+				watching: args.getWatchList(),
+				daemonStartOptions: args.getOptionsForApp()
 			});
 			break;
 		case 'addlog':
