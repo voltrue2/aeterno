@@ -1,8 +1,10 @@
+var writeFile = __dirname + '/test.txt';
+var fs = require('fs');
 var async = require('async');
 var assert = require('assert');
 var exec = require('child_process').exec;
 var node = process.execPath;
-var command = process.execPath + ' ./test/test.js';
+var command = process.execPath + ' ./test/test.js --write';
 
 describe('Daemon tests ->', function () {
 
@@ -285,6 +287,14 @@ describe('Daemon tests ->', function () {
 		async.series(tasks, done);
 	});
 	*/
+
+	it('can read the text file that test.js writes when given the command-line option', function () {
+		fs.statSync(writeFile);
+	});
+
+	it('cleans up after the test', function (done) {
+		fs.unlink(writeFile, done);
+	});
 
 });
 
