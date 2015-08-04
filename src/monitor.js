@@ -101,7 +101,9 @@ function handleCommunication(msg) {
 
 function startApp() {
 	// start the application process
-	app = spawn(args.getExec(), [path, args.getOptionsForApp()], { detached: true, stdio: 'ignore' });
+	var cmd = [path];
+	cmd = cmd.concat(args.getOptionsForApp().split(' '));
+	app = spawn(args.getExec(), cmd, { detached: true, stdio: 'ignore' });
 	app.path = path;
 	app.started = Date.now();
 	app.reloaded = app.started;
@@ -265,8 +267,6 @@ function parseCommand(cmd) {
 function handleMessage(parsed) {
 	var message = new Message(parsed.value);
 	message.startSend();
-
-	logger.info('command recieved:', parsed);
 
 	switch (parsed.command) {
 		case 'status':
