@@ -8,11 +8,17 @@ Version 0.4.5
 
 ## Added
 
+#### Added update command to add/change logging
+
 #### Added daemon application start options to status output
 
 ## Changed
 
-None
+#### Dependency gracelog version updated to 0.5.1
+
+With this version, the daemon logging file will be combined for all log levels.
+
+#### Exception in monitor process will now force exit daemonized application process
 
 ## Deprecated
 

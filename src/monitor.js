@@ -9,6 +9,7 @@ var spawn = require('child_process').spawn;
 var socketName = require('../lib/socket-name');
 var path;
 var app;
+var watcherList = [];
 var appNameForLog = args.getPath();
 // if the application dies 10 times in 10 seconds, monitor will exit
 var maxNumOfDeath = 10;
@@ -30,8 +31,11 @@ if (args.getName()) {
 // and start monitor process
 logger.start(appNameForLog, function () {
 	process.on('uncaughtException', function (error) {
-		logger.error('Exception in monitor process: ' + error.message + '\n' + error.stack);
-		process.exit(1);
+		//logger.error('Exception in monitor process: ' + error.message + '\n' + error.stack);
+		//process.exit(1);
+		stopApp(function () {
+			handleExit(error || null);
+		});
 	});
 
 	process.on('exit', handleExit);
@@ -51,7 +55,9 @@ logger.start(appNameForLog, function () {
 });
 
 function handleExit(error) {
-	logger.error('Monitor process terminated with an error: ' + error.message + '\n' + error.stack);
+	if (error) {
+		logger.error('Monitor process is terminating with an error: ' + error.message + '\n' + error.stack);
+	}
 	fs.unlink(socketName(path), function (err) {
 		if (err) {
 			return logger.error('Failed to remove socket file: ' + err.message + '\n' + err.stack);
@@ -197,6 +203,16 @@ function reloadApp(cb) {
 
 // dirListToWatch is either true or a string
 function setupAutoReloading(path, dirListToWatch) {
+	// stop watchers first
+	if (watcherList.length) {
+		for (var k = 0, ken = watcherList.length; k < ken; k++) {
+			var item = watcherList[k];
+			item.watcher.close();
+			logger.info('Auto-reload stopped for ' + path + ' on ' + item.path);
+		}
+	}
+
+	// set up watchers from here on
 	var appRoot = path.substring(0, path.lastIndexOf('/'));
 	var list = dirListToWatch;
 	if (dirListToWatch === true) {
@@ -229,7 +245,8 @@ function setupAutoReloading(path, dirListToWatch) {
 	}
 	try {
 		for (var j = 0, jen = watchList.length; j < jen; j++) {
-			fs.watch(watchList[j], delegate(watchList[j]));
+			var watcher = fs.watch(watchList[j], delegate(watchList[j]));
+			watcherList.push({ watcher: watcher, path: watchList[j] });
 			logger.info('Auto-reload set up for ' + path + ' on ' + watchList[j]);
 		}
 	} catch (error) {
@@ -249,6 +266,8 @@ function handleMessage(parsed) {
 	var message = new Message(parsed.value);
 	message.startSend();
 
+	logger.info('command recieved:', parsed);
+
 	switch (parsed.command) {
 		case 'status':
 			message.send({
@@ -262,7 +281,9 @@ function handleMessage(parsed) {
 				reloaded: app.reloaded,
 				numOfRestarted: deathCount,
 				reloadedCount: app.reloadedCount,
-				watching: args.getWatchList(),
+				watching: watcherList.map(function (item) {
+					return item.path;
+				}),
 				daemonStartOptions: args.getOptionsForApp()
 			});
 			break;
@@ -282,6 +303,21 @@ function handleMessage(parsed) {
 					);
 				});
 			});
+			break;
+		case 'addwatch':
+			var newWatchList = parsed.option.split(',');
+			var prevWatchList = watcherList.map(function (item) {
+				return item.path;
+			});
+			setupAutoReloading(app.path, newWatchList);
+			message.send({
+				prevWatchPaths: prevWatchList.join(' ')
+			});
+			logger.info(
+				'watching added/changed from ' +
+				prevWatchList.join(' ') + ' to ' +
+				newWatchList.join(' ')
+			);
 			break;
 		default:
 			message.send({

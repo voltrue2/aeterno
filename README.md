@@ -97,6 +97,24 @@ node myApp.js restartall
 node myApp.js reload
 ```
 
+##### Update the daemon
+
+With `update` command, `aeterno` allows you to add/change logging path and auto-reload watching paths.
+
+Example For Adding/Changing Logging Path
+
+```
+node myApp.js update -l /my/logging/path/
+```
+
+Example For Adding/Changing Auto-reload Watching Paths
+
+```
+node myApp.js update -w /watch/this/folder/ /watch/that/folder/
+```
+
+**NOTE:** You may update both logging and auto-reloading paths at the same time.
+
 ##### List all daemon processes that runs with aeterno
 
 ```
@@ -177,6 +195,24 @@ Restart all daemons that runs with `aeterno`.
 ./aeterno status /path/to/your/app/
 ```
 
+##### Update the daemon
+
+With `update` command, `aeterno` allows you to add/change logging path and auto-reload watching paths.
+
+Example For Adding/Changing Logging Path
+
+```
+./daeterno update /path/to/your/app/ -l /my/logging/path/
+```
+
+Example For Adding/Changing Auto-reload Watching Paths
+
+```
+./aeterno update /path/to/your/app/ -w /watch/this/folder/ /watch/that/folder/
+```
+
+**NOTE:** You may update both logging and auto-reloading paths at the same time.
+
 ##### List all daemon processes that run with aeterno
 
 ```
@@ -201,11 +237,13 @@ It will add logging if the target daemon is not logging.
 
 ### Commands
 
-#### start [PATH]
+#### start [PATH] [OPTIONS]
 
 #### stop [PATH]
 
-#### status [PATH]
+#### update [PATH] [OPTIONS]
+
+#### status [PATH] [OPTIONS]
 
 #### restart [PATH]
 
@@ -286,7 +324,7 @@ Default Vaule:
         "name": "aeterno",
         "color": true,
         "help": {
-                        "usage": "Usage: ./aeterno {start|stop|stopall|restart|restartall|reload|status|list|clean} [PATH] [OPTION]",
+                        "usage": "Usage: ./aeterno {start|stop|stopall|restart|restartall|reload|update|status|list|clean} [PATH] [OPTION]",
                         "reloadNote": "{reload} works ONLY if your application handles SIGHUP.",
                         "description": "Daemonaize a target application process and monitor it.\n",
                         "options": "Options:",
@@ -299,7 +337,7 @@ Default Vaule:
                         "verbose": "       -v, --verbose:",
                         "verboseDesc": "     Be more verbose.",
                         "forced": "       -f:",
-                        "forcedDesc": "                Stops or restart all running daemon processes without user inputs. This option is for {stopall|restartall} command only.",
+                        "forcedDesc": "                Stops or restarts all running daemon processes without user inputs. This option is for {stopall|restartall} command only.",
                         "example": "Examples:",
                         "start": "     ./aeterno start",
                         "startDesc": "                       Start a daemon process.",
@@ -308,7 +346,9 @@ Default Vaule:
                         "startWithLog": "     ./aeterno start -l ./daemonlog/",
                         "startWithLogDesc": "       Start a daemon process and write log data to \"./daemonlog/\" directory.",
                         "startAndWatch": "     ./aeterno start -w ./modules ./lib",
-                        "startAndWatchDesc": "    Start a daemon process and watch \"./modules\" and \"./lib\". Anything changes in the watched directory, daemon process will automatically restart"
-        }
+                        "startAndWatchDesc": "    Start a daemon process and watch \"./modules\" and \"./lib\". Anything changes in the watched directory, daemon process will automatically restart",
+                        "update": "     ./aeterno update ./myapp.js",
+                        "updateDesc": "           Updates a currently running daemon application such as -l to add/change logging or -w [...] to add watch directories/files to auto-reload"
+                }
 }
 ```

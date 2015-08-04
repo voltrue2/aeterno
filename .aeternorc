@@ -2,7 +2,7 @@
 	"name": "aeterno",
 	"color": true,
 	"help": {
-			"usage": "Usage: ./aeterno {start|stop|stopall|restart|restartall|reload|status|list|clean} [PATH] [OPTION]",
+			"usage": "Usage: ./aeterno {start|stop|stopall|restart|restartall|reload|update|status|list|clean} [PATH] [OPTION]",
 			"reloadNote": "{reload} works ONLY if your application handles SIGHUP.",
 			"description": "Daemonaize a target application process and monitor it.\n",
 			"options": "Options:",
@@ -24,6 +24,8 @@
                         "startWithLog": "     ./aeterno start -l ./daemonlog/",
 			"startWithLogDesc": "       Start a daemon process and write log data to \"./daemonlog/\" directory.",
 			"startAndWatch": "     ./aeterno start -w ./modules ./lib",
-			"startAndWatchDesc": "    Start a daemon process and watch \"./modules\" and \"./lib\". Anything changes in the watched directory, daemon process will automatically restart"
-	}
+			"startAndWatchDesc": "    Start a daemon process and watch \"./modules\" and \"./lib\". Anything changes in the watched directory, daemon process will automatically restart",
+			"update": "     ./aeterno update ./myapp.js",
+			"updateDesc": "           Updates a currently running daemon application such as -l to add/change logging or -w [...] to add watch directories/files to auto-reload"
+		}
 }
