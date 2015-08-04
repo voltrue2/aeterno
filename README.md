@@ -202,7 +202,7 @@ With `update` command, `aeterno` allows you to add/change logging path and auto-
 Example For Adding/Changing Logging Path
 
 ```
-./daeterno update /path/to/your/app/ -l /my/logging/path/
+./aeterno update /path/to/your/app/ -l /my/logging/path/
 ```
 
 Example For Adding/Changing Auto-reload Watching Paths
@@ -226,12 +226,24 @@ You may add or change daemon log path.
 Example:
 
 ```
-./aeterno status myapp.js -l /my/new/log/path/
+./aeterno update myapp.js -l /my/new/log/path/
 ```
 
 Above example will change the logging path to `/my/new/log/path/`.
 
 It will add logging if the target daemon is not logging.
+
+## How To Add/Change Watch Directories/Files For Auto-Reloading
+
+Example:
+
+```
+./aeterno update /path/to/your/app -w /watch/this/folder/
+```
+
+Above example will change the watching directories/files to `/watch/this/folder/`.
+
+It will add watching if there were no directories/files being watched.
 
 ## Command-line Options
 
