@@ -14,6 +14,8 @@ Version 0.4.5
 
 ## Changed
 
+#### Bug fix for multiple command-line options passed to daemon application
+
 #### Dependency gracelog version updated to 0.5.1
 
 With this version, the daemon logging file will be combined for all log levels.

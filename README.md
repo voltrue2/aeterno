@@ -233,6 +233,33 @@ Above example will change the logging path to `/my/new/log/path/`.
 
 It will add logging if the target daemon is not logging.
 
+## Command-line Options
+
+`aeterno` passes command-line options to your daemon application.
+
+To do that, you simply need to add options when you start your daemon with aeterno.
+
+See the example below.
+
+Example:
+
+```
+./aeterno start myapp.js --my-option-to-be-passed -rfv
+```
+
+The above example will be the same as:
+
+```
+node myapp.js  --my-option-to-be-passed -rfv
+```
+
+To read the command-line options being passed from your application:
+
+```javascript
+var myOptionToBePassed = process.argv[2];
+var rfv = process.argv[3];
+```
+
 ## Commands And Options
 
 ### Commands
