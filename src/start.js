@@ -11,6 +11,7 @@ var root = __dirname;
 module.exports = function (path, logPath, autoReload, execPath) {
 	// listener for exceptions
 	process.on('uncaughtException', function (error) {
+		print.error(print.r('Failed to start daemon: ' + path));
 		print.error(print.r(error.message));
 		print.error(print.r(error.stack));
 		process.exit(1);
