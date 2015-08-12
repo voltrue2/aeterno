@@ -12,6 +12,10 @@ None
 
 ## Changed
 
+#### Bug fix in status.setup: Incorrect error handling when target process is not found
+
+#### Added application path validation
+
 #### Improved start command failure text output
 
 ## Deprecated
