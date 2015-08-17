@@ -16,11 +16,13 @@ module.exports = function (path, logPath, autoReload, execPath) {
 		print.error(print.r(error.stack));
 		process.exit(1);
 	});
+	var cwd = getCwd(path);
 	var status = new Status(path);
 	status.setup(function () {
 		if (status.isRunning) {
 			return status.end(new Error('Daemon process' + path + ' is already running'));
 		}
+
 		// set up the options
 		var args = [
 			root + '/monitor',
@@ -34,6 +36,7 @@ module.exports = function (path, logPath, autoReload, execPath) {
 		];
 
 		if (logPath) {
+			logPath = logPath[0] === '/' ? logPath : cwd + logPath;
 			args.push('-l');
 			args.push(logPath);
 			print.out('Logging in', logPath);
@@ -44,11 +47,12 @@ module.exports = function (path, logPath, autoReload, execPath) {
 		if (autoReload.length) {
 			args.push('-w');
 			for (var i = 0, len = autoReload.length; i < len; i++) {
-				print.out('Watching for auto-reload:', autoReload[i]);
-				fs.statSync(autoReload[i]);
-				args.push(autoReload[i]);
+				var wPath = autoReload[i][0] === '/' ? autoReload[i] : cwd + autoReload[i];
+				print.out('Watching for auto-reload:', wPath);
+				fs.statSync(wPath);
+				args.push(wPath);
 			}
-			print.out('Auto-restart enabled:');
+			print.out('Auto-restart enabled');
 		}
 		// start daemon
 		run(process.execPath, args, { detached: true, stdio: 'ignore' });
@@ -75,3 +79,30 @@ module.exports = function (path, logPath, autoReload, execPath) {
 		});
 	});
 };
+
+
+function getCwd(appPath) {
+	var finder = function (dir) {
+
+		if (dir === '/' || !dir) {
+			return null;
+		}
+
+		var stat = fs.statSync(dir);
+		if (stat.isDirectory()) {
+
+			if (dir[0] !== '/' && dir[0] !== '.') {
+				dir = './' + dir;
+			}
+
+			if (dir[dir.length - 1] !== '/') {
+				dir += '/';
+			}
+
+			return dir;
+		}
+		return finder(dir.substring(0, dir.lastIndexOf('/')));
+	};
+	return finder(appPath);
+}
+

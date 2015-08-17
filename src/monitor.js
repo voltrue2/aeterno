@@ -254,8 +254,8 @@ function setupAutoReloading(path, dirListToWatch) {
 	try {
 		var watchList = [];
 		for (var i = 0, len = list.length; i < len; i++) {
-			var dirPath = list[i].indexOf(appRoot) === -1 ? appRoot + '/' + list[i] : list[i];
-			watchList = dir(dirPath).concat(watchList);
+			var dirPathList = dir(list[i]);
+			watchList = dirPathList.concat(watchList);
 		}
 		for (var j = 0, jen = watchList.length; j < jen; j++) {
 			var watcher = fs.watch(watchList[j], delegate(watchList[j]));

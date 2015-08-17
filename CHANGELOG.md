@@ -12,6 +12,24 @@ Version 0.4.7
 
 ## Changed
 
+#### -w and -l now supports relative paths
+
+`-w` and `-l` options now understands relative paths given. 
+
+The paths are treated as relative to the application root path.
+
+Example:
+
+```
+./aeterno start my/app/ -w src/ -l logs/
+```
+
+The above example would mean:
+
+```
+./aeterno start my/app/ -w my/app/src/ -l my/app/logs/
+```
+
 #### Improved error catching for auto-reloading setup failure
 
 ## Deprecated

@@ -302,6 +302,22 @@ Be more verbose.
 
 #### -l [PATH], --log=[PATH]
 
+**NOTE:**
+
+The paths are treated as relative to the application root path.
+
+Example:
+
+```
+./aeterno start my/app/ -w src/ -l logs/
+```
+
+The above example would mean:
+
+```
+./aeterno start my/app/ -w my/app/src/ -l my/app/logs/
+```
+
 Writes log data in the given directory
 
 #### -e [PATH], --exec=[PATH]
@@ -319,6 +335,22 @@ The above example will daemonize a python script.
 #### -w [PATH] [PATH] ..., -a [PATH] [PATH] ...
 
 Watch changes in the given directories and/or files to auto-restart.
+
+**NOTE:**
+
+The paths are treated as relative to the application root path.
+
+Example:
+
+```
+./aeterno start my/app/ -w src/ -l logs/
+```
+
+The above example would mean:
+
+```
+./aeterno start my/app/ -w my/app/src/ -l my/app/logs/
+```
 
 #### -f
 
