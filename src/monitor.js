@@ -12,6 +12,8 @@ var app;
 var watcherList = [];
 var appNameForLog = args.getPath();
 // if the application dies 10 times in 10 seconds, monitor will exit
+var lastAutoReloaded = 0;
+var autoReloadInterval = 1000;
 var maxNumOfDeath = 10;
 var deathInterval = 10000;
 var timeOfDeath = 0;
@@ -230,29 +232,39 @@ function setupAutoReloading(path, dirListToWatch) {
 
 	var reloader = function (event, filename) {
 		if (event === 'change') {
+
+			var now = Date.now();
+
+			if (now - lastAutoReloaded <= autoReloadInterval) {
+				logger.warn('Auto-reloading in rapid succuession: auto-reload ignored');
+				return;
+			}
+
 			reloadApp(function () {
 				logger.info(
 					'Change in watched directories detected [' +
 					filename + ']: auto-reloaded daemon process of ' + path
 				);
+				lastAutoReloaded = now;
 			});
 		}
 	};
 
 	// set up the watcher
-	var watchList = [];
-	for (var i = 0, len = list.length; i < len; i++) {
-		var dirPath = list[i].indexOf(appRoot) === -1 ? appRoot + '/' + list[i] : list[i];
-		watchList = dir(dirPath).concat(watchList);
-	}
 	try {
+		var watchList = [];
+		for (var i = 0, len = list.length; i < len; i++) {
+			var dirPath = list[i].indexOf(appRoot) === -1 ? appRoot + '/' + list[i] : list[i];
+			watchList = dir(dirPath).concat(watchList);
+		}
 		for (var j = 0, jen = watchList.length; j < jen; j++) {
 			var watcher = fs.watch(watchList[j], delegate(watchList[j]));
 			watcherList.push({ watcher: watcher, path: watchList[j] });
 			logger.info('Auto-reload set up for ' + path + ' on ' + watchList[j]);
 		}
 	} catch (error) {
-		logger.error('Failed to set up auto-reload watcher: ' + error.message);
+		logger.error('Failed to set up auto-reload watcher');
+		throw error;
 	}	
 }
 

@@ -4,6 +4,26 @@ This is a list of manually mantained changes and updates for each version.
 
 ***
 
+Version 0.4.7
+
+## Added
+
+#### Auto-reload now ignores very rapid auto-reloading within 1 second
+
+## Changed
+
+#### Improved error catching for auto-reloading setup failure
+
+## Deprecated
+
+None
+
+## Removed
+
+None
+
+***
+
 Version 0.4.6
 
 ## Added
