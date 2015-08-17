@@ -84,8 +84,12 @@ module.exports = function (path, logPath, autoReload, execPath) {
 function getCwd(appPath) {
 	var finder = function (dir) {
 
-		if (dir === '/' || !dir) {
-			return null;
+		if (dir === '.' || dir === 'index.js' || dir === './index.js') {
+			return './';
+		}
+
+		if (dir === '/') {
+			return dir;
 		}
 
 		var stat = fs.statSync(dir);
