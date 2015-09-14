@@ -14,6 +14,8 @@ None
 
 #### Status output for watched files improved
 
+#### Status output text changed
+
 ## Deprecated
 
 None
