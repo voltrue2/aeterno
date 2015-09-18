@@ -18,6 +18,12 @@ module.exports = function (appPath) {
 			return status.end();
 		}
 		status.getStatus(function (data) {
+
+			if (!data.msg.logPath) {
+				print.error(print.r('No daemon log for ' + appPath));
+				return status.end();
+			}
+
 			tail(data.msg.logPath, function (error) {
 				if (error) {
 					print.error(print.r('Cannot tail daemon logs:' + error.message));
