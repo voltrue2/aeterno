@@ -214,6 +214,8 @@ function setupAutoReloading(path, dirListToWatch) {
 			item.watcher.close();
 			logger.info('Auto-reload stopped for ' + path + ' on ' + item.path);
 		}
+		// reset watcherList
+		watcherList = [];
 	}
 
 	// set up watchers from here on

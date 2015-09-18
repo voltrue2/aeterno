@@ -57,6 +57,12 @@ node myApp.js start -w /dir/to/watch/for/change/ /file/to/watch/for/change
 node myApp.js status
 ```
 
+##### Tail daemon logs
+
+```
+node myApp.js tail
+```
+
 ##### Stop the daemon
 
 ```
@@ -195,6 +201,12 @@ Restart all daemons that runs with `aeterno`.
 ./aeterno status /path/to/your/app/
 ```
 
+##### Tail daemon logs
+
+```
+./aeterno tail /path/to/your/app/
+```
+
 ##### Update the daemon
 
 With `update` command, `aeterno` allows you to add/change logging path and auto-reload watching paths.
@@ -283,6 +295,8 @@ var rfv = process.argv[3];
 #### update [PATH] [OPTIONS]
 
 #### status [PATH] [OPTIONS]
+
+#### tail [PATH]
 
 #### restart [PATH]
 

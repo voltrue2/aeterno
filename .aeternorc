@@ -2,7 +2,7 @@
 	"name": "aeterno",
 	"color": true,
 	"help": {
-			"usage": "Usage: ./aeterno {start|stop|stopall|restart|restartall|reload|update|status|list|clean} [PATH] [OPTION]",
+			"usage": "Usage: ./aeterno {start|stop|stopall|restart|restartall|reload|update|status|tail|list|clean} [PATH] [OPTION]",
 			"reloadNote": "{reload} works ONLY if your application handles SIGHUP.",
 			"description": "Daemonaize a target application process and monitor it.\n",
 			"options": "Options:",

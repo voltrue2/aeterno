@@ -4,6 +4,32 @@ This is a list of manually mantained changes and updates for each version.
 
 ***
 
+Version 0.4.9
+
+## Added
+
+#### tail command added
+
+`./aeterno tail /my/app/`
+
+To tail daemon logs.
+
+## Chanded
+
+#### Aeterno can now check status and restart/stop daemon applications with different daemon name
+
+#### Bug fix: list/status output for watched file list was not resetting when restarted or reloaded
+
+## Deprecated
+
+None
+
+## Removed
+
+None
+
+***
+
 Version 0.4.8
 
 ## Added
