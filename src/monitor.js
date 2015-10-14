@@ -1,7 +1,7 @@
 'use strict';
 
 var fs = require('fs');
-var dir = require('../lib/dir');
+var watcher = require('../lib/watcher');
 var modName = require('../lib/modname');
 var args = require('../lib/args');
 var net = require('net');
@@ -207,6 +207,7 @@ function reloadApp(cb) {
 
 // dirListToWatch is either true or a string
 function setupAutoReloading(path, dirListToWatch) {
+	/*
 	// stop watchers first
 	if (watcherList.length) {
 		for (var k = 0, ken = watcherList.length; k < ken; k++) {
@@ -267,7 +268,57 @@ function setupAutoReloading(path, dirListToWatch) {
 	} catch (error) {
 		logger.error('Failed to set up auto-reload watcher');
 		throw error;
-	}	
+	}
+	*/
+	// stop watchers first
+	if (watcherList.length) {
+		for (var k = 0, ken = watcherList.length; k < ken; k++) {
+			var item = watcherList[k];
+			watcher.stop(item.path);
+			logger.info('Auto-reload stopped for ' + path + ' on ' + item.path);
+		}
+		// reset watcherList
+		watcherList = [];
+	}
+	// set up watchers from here on
+	var appRoot = path.substring(0, path.lastIndexOf('/'));
+	var list = [];
+	if (dirListToWatch === true) {
+		// no optional directories to watch given: watch the applicaiton root for auto-reloading 
+		list.push(appRoot);
+	} else {
+		list = dirListToWatch;
+	}
+
+	var reloader = function (filename) {
+		var now = Date.now();
+
+		if (now - lastAutoReloaded <= autoReloadInterval) {
+			logger.warn('Auto-reloading in rapid succuession: auto-reload ignored');
+			return;
+		}
+
+		reloadApp(function () {
+			logger.info(
+				'Change in watched directories detected [' +
+				filename + ']: auto-reloaded daemon process of ' + path
+			);
+			lastAutoReloaded = now;
+		});
+	};
+
+	// set up the watcher
+	try {
+		for (var i = 0, len = list.length; i < len; i++) {
+			var event = watcher.start(list[i]);
+			event.on('change', reloader);
+			watcherList.push({ path: list[i] });
+			logger.info('Auto-reload set up for ' + path + ' on ' + list[i]);
+		}
+	} catch (error) {
+		logger.error('Failed to set up auto-reload watcher');
+		throw error;
+	}
 }
 
 function parseCommand(cmd) {
