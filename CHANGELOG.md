@@ -4,6 +4,28 @@ This is a list of manually mantained changes and updates for each version.
 
 ***
 
+Version 0.4.10
+
+## Added
+
+None
+
+## Changed
+
+#### File wather for auto-reload refactored and improved
+
+File watcher now detects new files/directories being added or removed.
+
+## Deprecated
+
+None
+
+## Removed
+
+None
+
+***
+
 Version 0.4.9
 
 ## Added
