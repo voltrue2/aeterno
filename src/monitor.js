@@ -207,69 +207,6 @@ function reloadApp(cb) {
 
 // dirListToWatch is either true or a string
 function setupAutoReloading(path, dirListToWatch) {
-	/*
-	// stop watchers first
-	if (watcherList.length) {
-		for (var k = 0, ken = watcherList.length; k < ken; k++) {
-			var item = watcherList[k];
-			item.watcher.close();
-			logger.info('Auto-reload stopped for ' + path + ' on ' + item.path);
-		}
-		// reset watcherList
-		watcherList = [];
-	}
-
-	// set up watchers from here on
-	var appRoot = path.substring(0, path.lastIndexOf('/'));
-	var list = dirListToWatch;
-	if (dirListToWatch === true) {
-		// no optional directories to watch given: watch the applicaiton root for auto-reloading 
-		list.push(appRoot);
-	}
-	
-	var delegate = function (targetPath) {
-		return function (event) {
-			reloader(event, targetPath);
-		};
-	};
-
-	var reloader = function (event, filename) {
-		if (event === 'change') {
-
-			var now = Date.now();
-
-			if (now - lastAutoReloaded <= autoReloadInterval) {
-				logger.warn('Auto-reloading in rapid succuession: auto-reload ignored');
-				return;
-			}
-
-			reloadApp(function () {
-				logger.info(
-					'Change in watched directories detected [' +
-					filename + ']: auto-reloaded daemon process of ' + path
-				);
-				lastAutoReloaded = now;
-			});
-		}
-	};
-
-	// set up the watcher
-	try {
-		var watchList = [];
-		for (var i = 0, len = list.length; i < len; i++) {
-			var dirPathList = dir(list[i]);
-			watchList = dirPathList.concat(watchList);
-		}
-		for (var j = 0, jen = watchList.length; j < jen; j++) {
-			var watcher = fs.watch(watchList[j], delegate(watchList[j]));
-			watcherList.push({ watcher: watcher, path: watchList[j] });
-			logger.info('Auto-reload set up for ' + path + ' on ' + watchList[j]);
-		}
-	} catch (error) {
-		logger.error('Failed to set up auto-reload watcher');
-		throw error;
-	}
-	*/
 	// stop watchers first
 	if (watcherList.length) {
 		for (var k = 0, ken = watcherList.length; k < ken; k++) {
