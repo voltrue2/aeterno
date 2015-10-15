@@ -239,7 +239,7 @@ function setupAutoReloading(path, dirListToWatch) {
 			for (var i = 0, len = changed.length; i < len; i++) {
 				logger.info(
 					'Change in watched directories detected [' +
-					changed[i].file + ']: auto-reloaded daemon process of ' + path
+					changed[i].file + ']<' + changed[i].type + '>: auto-reloaded daemon process of ' + path
 				);
 			}
 			lastAutoReloaded = now;

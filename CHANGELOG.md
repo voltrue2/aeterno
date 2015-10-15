@@ -4,7 +4,27 @@ This is a list of manually mantained changes and updates for each version.
 
 ***
 
-Version 0.5.10
+Version 0.5.1
+
+## Added
+
+None
+
+## Changed
+
+#### Bug fix with file watch that it can now detect file changes in a watched directories
+
+## Deprecated
+
+None
+
+## Removed
+
+None
+
+***
+
+Version 0.5.0
 
 ## Added
 
