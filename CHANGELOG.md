@@ -4,6 +4,28 @@ This is a list of manually mantained changes and updates for each version.
 
 ***
 
+Version 0.5.10
+
+## Added
+
+None
+
+## Changed
+
+#### Logging of watched files improved
+
+#### Bug fix: watch files is now working (previously only watching directories worked)
+
+## Deprecated
+
+None
+
+## Removed
+
+None
+
+***
+
 Version 0.4.10
 
 ## Added

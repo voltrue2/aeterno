@@ -227,19 +227,21 @@ function setupAutoReloading(path, dirListToWatch) {
 		list = dirListToWatch;
 	}
 
-	var reloader = function (filename) {
+	var reloader = function (dir, changed) {
 		var now = Date.now();
 
 		if (now - lastAutoReloaded <= autoReloadInterval) {
-			logger.warn('Auto-reloading in rapid succuession: auto-reload ignored');
+			logger.warn('Auto-reloading in rapid succuessioni [' + dir + ']: auto-reload ignored');
 			return;
 		}
 
 		reloadApp(function () {
-			logger.info(
-				'Change in watched directories detected [' +
-				filename + ']: auto-reloaded daemon process of ' + path
-			);
+			for (var i = 0, len = changed.length; i < len; i++) {
+				logger.info(
+					'Change in watched directories detected [' +
+					changed[i].file + ']: auto-reloaded daemon process of ' + path
+				);
+			}
 			lastAutoReloaded = now;
 		});
 	};
