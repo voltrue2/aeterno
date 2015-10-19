@@ -310,6 +310,71 @@ var rfv = process.argv[3];
 
 ### Options
 
+#### -c [PATH], --config=[PATH]
+
+An absolute path to configuration path.
+
+The configuration file **MUST** be a JSON file.
+
+#### Configuration File
+
+A configurations to pass options instead of giving them in command-line.
+
+```
+{
+	"log": <string>,
+	"watch": <array>,
+	"verbose": <boolean>,
+	"exec": <string>,
+	"forced": <boolean>
+}
+```
+
+##### log
+
+A path to logging directory.
+
+Equivalent to: `-l`, `--log`
+
+##### watch
+
+A list of files/directories to watch for auto-restarting.
+
+Equivalent to: `-w`, `-a`
+
+#### verbose
+
+Execute the daemon command in verbose mode.
+
+Equivalent to: `-v`, `--verbose`
+
+#### exec
+
+Specify an interpreter to run the daemon application.
+
+Equivalent to: `-e`, `--exec`
+
+#### forced
+
+Executes `stopall` or `restartall` **WITHOUT** command prompting.
+
+Equivalent to: `-f`
+
+**Example**:
+
+Configuration File:
+
+```json
+{
+	"log": "/path/to/your/daemon/log/",
+	"watch": [
+		"/dir/to/watch/for/auto-restart/"
+	]
+}
+```
+
+`./aeterno start myapp.js --config=/path/to/my/config.json`
+
 #### -v, --verbose
 
 Be more verbose.
@@ -369,6 +434,8 @@ The above example would mean:
 #### -f
 
 This option is for `stopall` or `restartall` command only. 
+
+Executes `stopall` or `restartall` without command prompting.
 
 #### -h, --help
 
