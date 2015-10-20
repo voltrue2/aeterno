@@ -381,6 +381,10 @@ Be more verbose.
 
 #### -l [PATH], --log=[PATH]
 
+Logs daemon process information such as process termination, restarts etc.
+
+It also captures application's stdout and stderr streams.
+
 **NOTE:**
 
 The paths are treated as relative to the application root path.

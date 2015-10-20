@@ -4,6 +4,26 @@ This is a list of manually mantained changes and updates for each version.
 
 ***
 
+Version 0.5.2
+
+## Added
+
+#### Captures and logs application stdout and stderr streams
+
+## Changed
+
+#### Outputs an error when invalid log path is given to start command
+
+## Deprecated
+
+None
+
+## Removed
+
+None
+
+***
+
 Version 0.5.1
 
 ## Added
