@@ -20,6 +20,7 @@ var timeOfDeath = 0;
 var deathCount = 0;
 var pkg = require('../package.json');
 var Log = require('../lib/log'); 
+// daemon monitor logger
 var logger = new Log(args.getLogPath());
 // message
 var Message = require('../lib/message');
@@ -107,10 +108,10 @@ function startApp() {
 	app = spawn(args.getExec(), cmd, { detached: true, stdio: 'pipe' });
 	// capture application's stdout and stderr steam and log
 	app.stdout.on('data', function (data) {
-		logger.info('{Application} ' + data);
+		logger.info('{Application} - ' + data);
 	});
 	app.stderr.on('data', function (data) {
-		logger.error('{Application} ' + data);
+		logger.error('{Application} - ' + data);
 	});
 	app.path = path;
 	app.started = Date.now();
