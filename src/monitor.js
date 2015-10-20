@@ -33,8 +33,6 @@ if (args.getName()) {
 // and start monitor process
 logger.start(appNameForLog, function () {
 	process.on('uncaughtException', function (error) {
-		//logger.error('Exception in monitor process: ' + error.message + '\n' + error.stack);
-		//process.exit(1);
 		stopApp(function () {
 			handleExit(error || null);
 		});
@@ -105,7 +103,15 @@ function startApp() {
 	// start the application process
 	var cmd = [path];
 	cmd = cmd.concat(args.getOptionsForApp().split(' '));
-	app = spawn(args.getExec(), cmd, { detached: true, stdio: 'ignore' });
+	//app = spawn(args.getExec(), cmd, { detached: true, stdio: 'ignore' });
+	app = spawn(args.getExec(), cmd, { detached: true, stdio: 'pipe' });
+	// capture application's stdout and stderr steam and log
+	app.stdout.on('data', function (data) {
+		logger.info('{Application} ' + data);
+	});
+	app.stderr.on('data', function (data) {
+		logger.error('{Application} ' + data);
+	});
 	app.path = path;
 	app.started = Date.now();
 	app.reloaded = app.started;

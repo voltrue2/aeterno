@@ -37,6 +37,7 @@ module.exports = function (path, logPath, autoReload, execPath) {
 
 		if (logPath) {
 			logPath = logPath[0] === '/' ? logPath : cwd + logPath;
+			fs.statSync(logPath);
 			args.push('-l');
 			args.push(logPath);
 			print.out('Logging in', logPath);
