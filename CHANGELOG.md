@@ -4,7 +4,27 @@ This is a list of manually mantained changes and updates for each version.
 
 ***
 
-Version 0.5.2
+Version 0.5.4
+
+## Added
+
+None
+
+## Changed
+
+#### Bug fix in monitor process using logger.warn() that did not exist
+
+## Deprecated
+
+None
+
+## Removed
+
+None
+
+***
+
+Version 0.5.3
 
 ## Added
 
@@ -20,6 +40,27 @@ None
 
 ## Removed
 
+None
+
+***
+
+Version 0.5.2
+
+## Added
+
+#### -c, --config option added
+
+The daemon command can now read options from a JSON configuration file.
+
+## Changed
+
+None
+
+## Deprecated
+
+None
+
+## Removed
 None
 
 ***
