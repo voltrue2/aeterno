@@ -24,6 +24,11 @@ var Log = require('../lib/log');
 var logger = new Log(args.getLogPath());
 // message
 var Message = require('../lib/message');
+// log names
+var LOGNAME = {
+	APP: '{APP}-',
+	DAEMON: '{DAEMON}-'
+};
 
 // if an alternate name is given
 if (args.getName()) {
@@ -41,7 +46,7 @@ logger.start(appNameForLog, function () {
 
 	process.on('exit', handleExit);
 	
-	logger.info('Daemon name: ' + modName.get());
+	logger.info(LOGNAME.DAEMON + 'Daemon name: ' + modName.get());
 
 	if (args.getCommand() === 'start') {
 		path = appNameForLog || null;
@@ -57,11 +62,21 @@ logger.start(appNameForLog, function () {
 
 function handleExit(error) {
 	if (error) {
-		logger.error('Monitor process is terminating with an error: ' + error.message + '\n' + error.stack);
+		logger.error(
+			LOGNAME.DAEMON +
+			'Monitor process is terminating with an error: ' +
+			error.message + '\n' +
+			error.stack
+		);
 	}
 	fs.unlink(socketName(path), function (err) {
 		if (err) {
-			return logger.error('Failed to remove socket file: ' + err.message + '\n' + err.stack);
+			return logger.error(
+				LOGNAME.DAEMON +
+				'Failed to remove socket file: ' +
+				err.message + '\n' +
+				err.stack
+			);
 		}
 		logger.stop(error, function () {
 			process.exit(error ? 1 : 0);
@@ -95,7 +110,7 @@ function handleCommunication(msg) {
 				handleMessage(parsed);		
 				return;
 			}
-			logger.error('unknown command: ' + command);
+			logger.error(LOGNAME.DAEMON + 'unknown command: ' + command);
 			break;
 	}
 }
@@ -108,10 +123,10 @@ function startApp() {
 	app = spawn(args.getExec(), cmd, { detached: true, stdio: 'pipe' });
 	// capture application's stdout and stderr steam and log
 	app.stdout.on('data', function (data) {
-		logger.info('{Application} - ' + data);
+		logger.info(LOGNAME.APP + data);
 	});
 	app.stderr.on('data', function (data) {
-		logger.error('{Application} - ' + data);
+		logger.error(LOGNAME.APP +  data);
 	});
 	app.path = path;
 	app.started = Date.now();
@@ -123,16 +138,17 @@ function startApp() {
 		setupAutoRestart(path, args.getWatchList());
 		autoRestartMsg = ' with auto-restart enabled';
 	}
-	logger.info('Started daemon process of ' + path + autoRestartMsg);
+	logger.info(LOGNAME.DAEMON + 'Started daemon process of ' + path + autoRestartMsg);
 	// if appllication dies unexpectedly, respawn it
 	app.once('exit', function (code, signal) {
 		deathCount += 1;
 		logger.info(
+			LOGNAME.DAEMON +
 			'Daemon process of ' + path + ' has exited (code:' + code + '): count of death [' +
 			deathCount + '/' + maxNumOfDeath + ']'
 		);
 		if (signal) {
-			logger.error('Application terminated by: ' + signal);
+			logger.error(LOGNAME.DAEMON + 'Application terminated by: ' + signal);
 		}
 		if (deathCount === 1) {
 			// application died for the first time
@@ -161,7 +177,7 @@ function startApp() {
 			deathCount = 0;
 		}
 		// respawn application process
-		logger.info('Restarting daemon process of ' + path);
+		logger.info(LOGNAME.DAEMON + 'Restarting daemon process of ' + path);
 		startApp();
 		var message = new Message(path);
 		message.startSend();
@@ -171,7 +187,11 @@ function startApp() {
 
 function stopApp(cb) {
 	if (app) {
-		logger.info('Stopped daemon process of ' + app.path + (app.restart ? ' to restart' : ''));
+		logger.info(
+			LOGNAME.DAEMON +
+			'Stopped daemon process of ' +
+			app.path + (app.restart ? ' to restart' : '')
+		);
 		logger.stop(null, function () {
 			// stop application
 			app.kill();
@@ -197,11 +217,19 @@ function reloadApp(cb) {
 			var pkg = require(path.replace(fileName, '') + 'package.json');
 			app.version = pkg && pkg.version ? pkg.version : 'Unknown';
 		} catch (error) {
-			logger.error(app.path + ' does not have a package.json [this error is not a fatal error]');
+			logger.warn(
+				LOGNAME.DAEMON + 
+				app.path +
+				' does not have a package.json [this error is not a fatal error]'
+			);
 			app.version = 'Unknown';
 		}
 		app.kill('SIGHUP');
-		logger.info('Reloading daemon process of ' + app.path);
+		logger.info(
+			LOGNAME.DAEMON +
+			'Reloading daemon process of ' +
+			app.path
+		);
 		if (cb) {
 			cb();
 		}
@@ -219,7 +247,10 @@ function setupAutoRestart(path, dirListToWatch) {
 		for (var k = 0, ken = watcherList.length; k < ken; k++) {
 			var item = watcherList[k];
 			watcher.stop(item.path);
-			logger.info('Auto-restart stopped for ' + path + ' on ' + item.path);
+			logger.info(
+				LOGNAME.DAEMON +
+				'Auto-restart stopped for ' + path + ' on ' + item.path
+			);
 		}
 		// reset watcherList
 		watcherList = [];
@@ -238,13 +269,17 @@ function setupAutoRestart(path, dirListToWatch) {
 		var now = Date.now();
 
 		if (now - lastAutoRestarted <= autoRestartInterval) {
-			logger.warn('Auto-restart in rapid succuessioni [' + dir + ']: auto-reload ignored');
+			logger.warn(
+				LOGNAME.DAEMON +
+				'Auto-restart in rapid succuessioni [' + dir + ']: auto-reload ignored'
+			);
 			return;
 		}
 
 		reloadApp(function () {
 			for (var i = 0, len = changed.length; i < len; i++) {
 				logger.info(
+					LOGNAME.DAEMON +
 					'Change in watched directories detected [' +
 					changed[i].file + ']<' + changed[i].type + '>: auto-restart daemon process of ' + path
 				);
@@ -261,10 +296,10 @@ function setupAutoRestart(path, dirListToWatch) {
 			var event = watcher.start(list[i]);
 			event.on('change', reloader);
 			watcherList.push({ path: list[i] });
-			logger.info('Auto-restart set up for ' + path + ' on ' + list[i]);
+			logger.info(LOGNAME.DAEMON + 'Auto-restart set up for ' + path + ' on ' + list[i]);
 		}
 	} catch (error) {
-		logger.error('Failed to set up auto-restart watcher');
+		logger.error(LOGNAME.DAEMON + 'Failed to set up auto-restart watcher');
 		throw error;
 	}
 }
@@ -310,6 +345,7 @@ function handleMessage(parsed) {
 						currentLogPath: logger.getPath()
 					});
 					logger.info(
+						LOGNAME.DAEMON +
 						'logging added/changed from ' + 
 						prevPath + ' to ' +
 						logger.getPath()
@@ -327,6 +363,7 @@ function handleMessage(parsed) {
 				prevWatchPaths: prevWatchList.join(' ')
 			});
 			logger.info(
+				LOGNAME.DAEMON +
 				'watching added/changed from ' +
 				prevWatchList.join(' ') + ' to ' +
 				newWatchList.join(' ')
@@ -339,7 +376,7 @@ function handleMessage(parsed) {
 					message: parsed.command + ' command given'
 				}
 			});
-			logger.error('unknown command given: ' + parsed.command);	
+			logger.error(LOGNAME.DAEMON + 'unknown command given: ' + parsed.command);	
 			break;
 	}
 }

@@ -14,6 +14,8 @@ None
 
 #### Bug fix in monitor process using logger.warn() that did not exist
 
+#### Logging data now has prefix for daemon log and application log
+
 ## Deprecated
 
 None
