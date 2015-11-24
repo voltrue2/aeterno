@@ -120,7 +120,7 @@ function startApp() {
 	var cmd = [path];
 	cmd = cmd.concat(args.getOptionsForApp().split(' '));
 	//app = spawn(args.getExec(), cmd, { detached: true, stdio: 'ignore' });
-	app = spawn(args.getExec(), cmd, { detached: true, stdio: 'pipe' });
+	app = spawn(args.getExec(), cmd, { detached: true, stdio: [ 0, 'pipe', 'pipe' ] });
 	// capture application's stdout and stderr steam and log
 	app.stdout.on('data', function (data) {
 		logger.info(LOGNAME.APP + data);

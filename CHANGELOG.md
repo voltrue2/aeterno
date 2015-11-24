@@ -2,6 +2,24 @@
 
 This is a list of manually mantained changes and updates for each version.
 
+Version 0.5.5
+
+## Added
+
+None
+
+## Changed
+
+#### Bug fix on logging from application for error (stderr)
+
+## Deprecated
+
+None
+
+## Removed
+
+None
+
 ***
 
 Version 0.5.4
