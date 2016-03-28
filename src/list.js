@@ -1,6 +1,6 @@
 var fs = require('fs');
 var exec = require('child_process').exec;
-var async = require('async');
+var async = require('../lib/async');
 var print = require('../lib/print');
 var sockName = require('../lib/socket-name');
 var modName = require('../lib/modname');

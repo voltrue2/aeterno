@@ -2,6 +2,26 @@
 
 This is a list of manually mantained changes and updates for each version.
 
+Version 0.5.6
+
+## Added
+
+None
+
+## Changed
+
+#### Removed async as dependency
+
+#### Updated dependency gracelog's version
+
+## Deprecated
+
+None
+
+## Removed
+
+None
+
 Version 0.5.5
 
 ## Added

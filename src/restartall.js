@@ -1,5 +1,5 @@
 var exec = require('child_process').exec;
-var async = require('async');
+var async = require('../lib/async');
 var args = require('../lib/args');
 var print = require('../lib/print');
 var modName = require('../lib/modname');

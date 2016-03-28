@@ -1,6 +1,6 @@
 var writeFile = __dirname + '/test.txt';
 var fs = require('fs');
-var async = require('async');
+var async = require('../lib/async');
 var assert = require('assert');
 var exec = require('child_process').exec;
 var node = process.execPath;
