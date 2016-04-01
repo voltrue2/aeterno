@@ -87,7 +87,7 @@ module.exports = function () {
 				}
 				data.user = appData.user;
 				data.uid = appData.uid;
-				st.outputStatus(data, list);
+				st.outputStatus(data, list, true);
 				cb();
 			});
 		});

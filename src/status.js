@@ -17,7 +17,7 @@ module.exports = function (appPath) {
 			return status.end();
 		}
 		status.getStatus(function (data, processList) {
-			status.outputStatus(data, processList);
+			status.outputStatus(data, processList, true);
 			status.end();
 		});
 	});
