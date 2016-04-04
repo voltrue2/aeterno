@@ -18,7 +18,11 @@ module.exports = function (path, logPath, autoReload, execPath) {
 	});
 	var cwd = getCwd(path);
 	var status = new Status(path);
+
+	status.verbose('Starting a daemon process of ' + path);
+
 	status.setup(function () {
+
 		if (status.isRunning) {
 			return status.end(new Error('Daemon process' + path + ' is already running'));
 		}
@@ -55,6 +59,9 @@ module.exports = function (path, logPath, autoReload, execPath) {
 			}
 			print.out('Auto-restart enabled');
 		}
+
+		status.verbose('Start daemon: ' + process.execPath + JSON.stringify(args, null, 2));
+
 		// start daemon
 		run(process.execPath, args, { detached: true, stdio: 'ignore' });
 		// now check the process' health

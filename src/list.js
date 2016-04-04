@@ -13,6 +13,8 @@ module.exports = function () {
 		print.error(print.r(error.stack));
 		process.exit(1);
 	});
+	// status object
+	var st;
 	var apps = [];
 	// get list of applications
 	var getAppPaths = function (next) {
@@ -75,7 +77,7 @@ module.exports = function () {
 		async.eachSeries(apps, findApp, next);
 	};
 	var findApp = function (appData, cb) {
-		var st = new Status(appData.path);
+		st = new Status(appData.path);
 		st.setup(function () {
 			if (!st.isRunning) {
 				return cb();
@@ -98,7 +100,7 @@ module.exports = function () {
 			print.error(print.r(error.stack));
 			return process.exit(1);
 		}
-		process.exit();
+		st.end();
 	};
 	// execute the commands
 	async.series([

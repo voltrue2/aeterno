@@ -16,7 +16,7 @@ describe('Daemon tests ->', function () {
 
 	it('Starts a daemon', function (done) {
 		var start = function (next) {
-			exec(command + ' start ', function (err, out) {
+			exec(command + ' start', function (err, out) {
 
 				if (err) {
 					console.error(err);

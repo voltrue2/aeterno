@@ -2,13 +2,17 @@
 
 This is a list of manually mantained changes and updates for each version.
 
-Version 0.5.7
+Version 0.6.0
 
 ## Added
 
 None
 
 ## Changed
+
+#### Reformatted list and status output
+
+#### Corrected the way to find application processes
 
 #### Corrected cluster process output of node.js
 
