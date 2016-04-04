@@ -2,6 +2,24 @@
 
 This is a list of manually mantained changes and updates for each version.
 
+Version 0.6.2
+
+## Added
+
+None
+
+## Changed
+
+#### status output header displays application path
+
+## Deprecated
+
+None
+
+## Removed
+
+None
+
 Version 0.6.1
 
 ## Added
