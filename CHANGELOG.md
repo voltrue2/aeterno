@@ -2,6 +2,24 @@
 
 This is a list of manually mantained changes and updates for each version.
 
+Version 0.6.3
+
+## Added
+
+None
+
+## Changed
+
+#### status output application name color changed
+
+## Deprecated
+
+None
+
+## Removed
+
+None
+
 Version 0.6.2
 
 ## Added
