@@ -100,7 +100,9 @@ module.exports = function () {
 			print.error(print.r(error.stack));
 			return process.exit(1);
 		}
-		st.end();
+		if (st) {
+			st.end();
+		}
 	};
 	// execute the commands
 	async.series([

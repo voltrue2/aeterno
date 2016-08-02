@@ -2,6 +2,28 @@
 
 This is a list of manually mantained changes and updates for each version.
 
+Version 0.6.4
+
+## Added
+
+None
+
+## Changed
+
+#### Status fixed missing an error handling
+
+#### Status fixed exception when there's no daemon process
+
+## Deprecated
+
+None
+
+## Removed
+
+None
+
+***
+
 Version 0.6.3
 
 ## Added
