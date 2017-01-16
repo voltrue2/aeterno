@@ -2,6 +2,26 @@
 
 This is a list of manually mantained changes and updates for each version.
 
+Version 0.6.5
+
+## Added
+
+None
+
+## Changed
+
+#### Dependency gracelog version updated to 0.6.9
+
+## Deprecated
+
+None
+
+## Removed
+
+None
+
+***
+
 Version 0.6.4
 
 ## Added

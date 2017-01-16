@@ -1,7 +1,7 @@
 {
 	"name": "aeterno",
 	"description": "A daemonization tool written in javascript.",
-	"version": "0.6.4",
+	"version": "0.6.5",
 	"author": "Nobuyori Takahashi <voltrue2@yahoo.com>",
 	"repository": {
 		"type": "git",
@@ -12,7 +12,7 @@
 		"install": "ln -fs node_modules/aeterno/aeterno ../../aeterno"
 	},
 	"dependencies": {
-		"gracelog": "0.6.3"
+		"gracelog": "0.6.9"
 	},
 	"devDependencies": {
 		"mocha": "1.20.1"
