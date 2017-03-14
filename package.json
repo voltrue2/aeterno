@@ -1,15 +1,11 @@
 {
 	"name": "aeterno",
 	"description": "A daemonization tool written in javascript.",
-	"version": "0.6.5",
+	"version": "1.0.0",
 	"author": "Nobuyori Takahashi <voltrue2@yahoo.com>",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/voltrue2/aeterno.git"
-	},
-	"scripts": {
-		"preinstall": "rm -f ../../aeterno",
-		"install": "ln -fs node_modules/aeterno/aeterno ../../aeterno"
 	},
 	"dependencies": {
 		"gracelog": "0.6.9"

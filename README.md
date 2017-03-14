@@ -131,16 +131,14 @@ node myApp.js list
 
 aeterno also allows you to daemonize your application without change your application's code.
 
-When installed from by `npm install aeterno`, the module creates an executable in your application's root directory.
-
-`aeterno` will be created in your application's directory.
+The daemonization command is located at `./node_modules/aeterno/bin/daemon`
 
 Example
 
 ##### Start your application as a daemon
 
 ```
-./aeterno start /path/to/your/app/
+./node_modules/aeterno/bin/daemon start /path/to/your/app/
 ```
 
 ##### Start your application as a daemon with logging
@@ -152,13 +150,13 @@ Example
 ###### Start your application as a daemon and watch for changes in the given directories/files to auto-restart.
 
 ```
-./aeterno start /path/to/your/app/ -w /path/to/watch/ file/to/watch
+./node_modules/aeterno/bin/daemon start /path/to/your/app/ -w /path/to/watch/ file/to/watch
 ```
 
 ##### Stop your daemon
 
 ```
-./aeterno stop /path/to/your/app/
+./node_modules/aeterno/bin/daemon stop /path/to/your/app/
 ```
 
 ##### Stop all daemons
@@ -168,13 +166,13 @@ Stop all daemons that runs with `aeterno`.
 **NOTE:** Each daemon process requires user input to stop the process. If you do not wish to enter user input to stop all daemons, then use `-f` option.
 
 ```
-./aeterno stopall
+./node_modules/aeterno/bin/daemon stopall
 ```
 
 ##### Restart your daemon
 
 ```
-./aeterno restart /path/to/your/app/
+./node_modules/aeterno/bin/daemon restart /path/to/your/app/
 ```
 
 ##### Restart all daemons
@@ -184,7 +182,7 @@ Restart all daemons that runs with `aeterno`.
 **NOTE:** Each daemon process requires user input to restart the process. If you do not wish to enter user input to restart all daemons, then use `-f` option.
 
 ```
-./aeterno restartall
+./node_modules/aeterno/bin/daemon restartall
 ```
 
 ##### Reload your daemon
@@ -192,19 +190,19 @@ Restart all daemons that runs with `aeterno`.
 **NOTE:** `reload` only works if your application listenes to `SIGHUP` and handles it as reload.
 
 ```
-./aeterno reload /path/to/your/app/
+./node_modules/aeterno/bin/daemon reload /path/to/your/app/
 ```
 
 ##### Check the status of your daemon
 
 ```
-./aeterno status /path/to/your/app/
+./node_modules/aeterno/bin/daemon status /path/to/your/app/
 ```
 
 ##### Tail daemon logs
 
 ```
-./aeterno tail /path/to/your/app/
+./node_modules/aeterno/bin/daemon tail /path/to/your/app/
 ```
 
 ##### Update the daemon
@@ -214,13 +212,13 @@ With `update` command, `aeterno` allows you to add/change logging path and auto-
 Example For Adding/Changing Logging Path
 
 ```
-./aeterno update /path/to/your/app/ -l /my/logging/path/
+./node_modules/aeterno/bin/daemon update /path/to/your/app/ -l /my/logging/path/
 ```
 
 Example For Adding/Changing Auto-reload Watching Paths
 
 ```
-./aeterno update /path/to/your/app/ -w /watch/this/folder/ /watch/that/folder/
+./node_modules/aeterno/bin/daemon update /path/to/your/app/ -w /watch/this/folder/ /watch/that/folder/
 ```
 
 **NOTE:** You may update both logging and auto-reloading paths at the same time.
@@ -228,7 +226,7 @@ Example For Adding/Changing Auto-reload Watching Paths
 ##### List all daemon processes that run with aeterno
 
 ```
-./aeterno list
+./node_modules/aeterno/bin/daemon list
 ```
 
 ## How To Add/Change Logging Path
@@ -238,7 +236,7 @@ You may add or change daemon log path.
 Example:
 
 ```
-./aeterno update myapp.js -l /my/new/log/path/
+./node_modules/aeterno/bin/daemon update myapp.js -l /my/new/log/path/
 ```
 
 Above example will change the logging path to `/my/new/log/path/`.
@@ -250,7 +248,7 @@ It will add logging if the target daemon is not logging.
 Example:
 
 ```
-./aeterno update /path/to/your/app -w /watch/this/folder/
+./node_modules/aeterno/bin/daemon update /path/to/your/app -w /watch/this/folder/
 ```
 
 Above example will change the watching directories/files to `/watch/this/folder/`.
@@ -268,7 +266,7 @@ See the example below.
 Example:
 
 ```
-./aeterno start myapp.js --my-option-to-be-passed -rfv
+./node_modules/aeterno/bin/daemon start myapp.js --my-option-to-be-passed -rfv
 ```
 
 The above example will be the same as:
@@ -373,7 +371,7 @@ Configuration File:
 }
 ```
 
-`./aeterno start myapp.js --config=/path/to/my/config.json`
+`./node_modules/aeterno/bin/daemon start myapp.js --config=/path/to/my/config.json`
 
 #### -v, --verbose
 
@@ -392,13 +390,13 @@ The paths are treated as relative to the application root path.
 Example:
 
 ```
-./aeterno start my/app/ -w src/ -l logs/
+./node_modules/aeterno/bin/daemon start my/app/ -w src/ -l logs/
 ```
 
 The above example would mean:
 
 ```
-./aeterno start my/app/ -w my/app/src/ -l my/app/logs/
+./node_modules/aeterno/bin/daemon start my/app/ -w my/app/src/ -l my/app/logs/
 ```
 
 Writes log data in the given directory
@@ -410,7 +408,7 @@ Daemonize the target application with the given interpreter.
 Example:
 
 ```
-./aeterno start myapp.py -e python
+./node_modules/aeterno/bin/daemon start myapp.py -e python
 ```
 
 The above example will daemonize a python script.
@@ -426,13 +424,13 @@ The paths are treated as relative to the application root path.
 Example:
 
 ```
-./aeterno start my/app/ -w src/ -l logs/
+./node_modules/aeterno/bin/daemon start my/app/ -w src/ -l logs/
 ```
 
 The above example would mean:
 
 ```
-./aeterno start my/app/ -w my/app/src/ -l my/app/logs/
+./node_modules/aeterno/bin/daemon start my/app/ -w my/app/src/ -l my/app/logs/
 ```
 
 #### -f
@@ -461,9 +459,9 @@ You may manually change the target application path to daemonize.
 
 **NOTE:** This is used only when you are using aeterno programatically.
 
-## .aeternorc file
+## .aeternoc file
 
-aeterno module can read `.aeternorc` file to allow configurations from outside.
+aeterno module can read `.aeternoc` file to allow configurations from outside.
 
 The configurable values are:
 
@@ -480,7 +478,7 @@ Default Vaule:
         "name": "aeterno",
         "color": true,
         "help": {
-                        "usage": "Usage: ./aeterno {start|stop|stopall|restart|restartall|reload|update|status|list|clean} [PATH] [OPTION]",
+                        "usage": "Usage: ./node_modules/aeterno/bin/daemon {start|stop|stopall|restart|restartall|reload|update|status|list|clean} [PATH] [OPTION]",
                         "reloadNote": "{reload} works ONLY if your application handles SIGHUP.",
                         "description": "Daemonaize a target application process and monitor it.\n",
                         "options": "Options:",
@@ -495,15 +493,15 @@ Default Vaule:
                         "forced": "       -f:",
                         "forcedDesc": "                Stops or restarts all running daemon processes without user inputs. This option is for {stopall|restartall} command only.",
                         "example": "Examples:",
-                        "start": "     ./aeterno start",
+                        "start": "     ./node_modules/aeterno/bin/daemon start",
                         "startDesc": "                       Start a daemon process.",
-                        "startWithPath": "     ./aeterno start ./myServer.js",
+                        "startWithPath": "     ./node_modules/aeterno/bin/daemon start ./myServer.js",
                         "startWithPathDesc": "         Start a daemon process of \"./myServer.js\".",
-                        "startWithLog": "     ./aeterno start -l ./daemonlog/",
+                        "startWithLog": "     ./node_modules/aeterno/bin/daemon start -l ./daemonlog/",
                         "startWithLogDesc": "       Start a daemon process and write log data to \"./daemonlog/\" directory.",
-                        "startAndWatch": "     ./aeterno start -w ./modules ./lib",
+                        "startAndWatch": "     ./node_modules/aeterno/bin/daemon start -w ./modules ./lib",
                         "startAndWatchDesc": "    Start a daemon process and watch \"./modules\" and \"./lib\". Anything changes in the watched directory, daemon process will automatically restart",
-                        "update": "     ./aeterno update ./myapp.js",
+                        "update": "     ./node_modules/aeterno/bin/daemon update ./myapp.js",
                         "updateDesc": "           Updates a currently running daemon application such as -l to add/change logging or -w [...] to add watch directories/files to auto-reload"
                 }
 }
